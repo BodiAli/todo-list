@@ -1,11 +1,21 @@
 import "./reset.css";
 import "./style.css";
-import icon from "./images/task-list.png";
-// Import all of Bootstrap's JS
 import * as bootstrap from "bootstrap";
+import addImages from "./add-images.js";
 
-const header = document.querySelector("header");
-const iconHeader = new Image();
-iconHeader.src = icon;
-iconHeader.alt = "task list";
-header.appendChild(iconHeader);
+addImages();
+const addTodoButton = document.getElementById("add");
+addTodoButton.addEventListener("click", showForm);
+const addForm = document.getElementById("add-todo");
+const darkOverlay = document.getElementById("dark-overlay");
+
+document.addEventListener("click", (event) => {
+  if (!addForm.contains(event.target) && event.target.tagName !== "I") {
+    addForm.style.display = "none";
+    darkOverlay.classList.remove("dark-overlay");
+  }
+});
+function showForm(ev) {
+  addForm.style.display = "block";
+  darkOverlay.classList.add("dark-overlay");
+}
