@@ -28,7 +28,6 @@ header > img {
 }
 #container {
   height: 36rem;
-  /* width: 100%; */
 }
 #lists-col {
   background-color: #402e32;
@@ -68,7 +67,7 @@ header > img {
   width: fit-content;
   height: fit-content;
   font-size: 4rem;
-  color: #e36300;
+  color: #ed8434;
 }
 #add:active {
   color: #402e32;
@@ -82,7 +81,9 @@ header > img {
   display: none;
   z-index: 1;
 }
-.dark-overlay {
+.dark-overlay,
+.dark-overlay2,
+.dark-overlay3 {
   position: fixed;
   top: 0;
   left: 0;
@@ -90,8 +91,54 @@ header > img {
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
 }
-
-.card {
+#edit-todo {
+  top: 10%;
+  left: 32%;
+  display: none;
+  z-index: 1;
+  width: 500px;
+}
+.card.edit {
+  height: 70%;
+}
+.card.add {
   height: 80vh;
   width: 80vw;
+}
+#form-background,
+#form-background-edit {
+  height: 90%;
+  opacity: 0.1;
+  filter: brightness(110%) contrast(150%);
+}
+#submit-form {
+  margin-left: 450px;
+}
+#textarea {
+  resize: none;
+}
+#title {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+#title + label {
+  font-size: 1.1rem;
+  color: gray;
+  font-weight: bold;
+}
+.backgroundcolor-green {
+  background-color: #00a230;
+}
+.backgroundcolor-yellow {
+  background-color: #e36300;
+}
+.backgroundcolor-red {
+  background-color: rgba(255, 0, 0, 0.875);
+}
+#display-details {
+  top: 20%;
+  left: 32%;
+  display: none;
+  z-index: 1;
+  width: 500px;
 }

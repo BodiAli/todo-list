@@ -5,7 +5,19 @@ import todoBackground from "./images/form-background.jpg";
 export default function addImages() {
   const header = document.querySelector("header");
   const head = document.querySelector("head");
+  const cardBodyAdd = document.querySelector(".card-body.card-img-overlay.add");
+  const cardBodyEdit = document.querySelector(".card-body.card-img-overlay.edit");
+  const cardElementAdd = document.querySelector(".card.add");
+  const cardElementEdit = document.querySelector(".card.edit");
   const linkTag = document.createElement("link");
+  const formBackgroundImageAdd = new Image();
+  formBackgroundImageAdd.src = todoBackground;
+  formBackgroundImageAdd.classList.add("card-img");
+  formBackgroundImageAdd.setAttribute("id", "form-background");
+  const formBackgroundImageEdit = new Image();
+  formBackgroundImageEdit.src = todoBackground;
+  formBackgroundImageEdit.classList.add("card-img");
+  formBackgroundImageEdit.setAttribute("id", "form-background-edit");
   linkTag.rel = "icon";
   linkTag.href = tabIcon;
   const iconHeader = new Image();
@@ -13,4 +25,6 @@ export default function addImages() {
   iconHeader.alt = "task list";
   header.appendChild(iconHeader);
   head.appendChild(linkTag);
+  cardElementAdd.insertBefore(formBackgroundImageAdd, cardBodyAdd);
+  cardElementEdit.insertBefore(formBackgroundImageEdit, cardBodyEdit);
 }
