@@ -23,7 +23,6 @@ function todoEditButton() {
           return item.todoID === resID;
         });
         editTodos(res);
-        // Assuming only one match is needed, so we can break out of the loop
         break;
       }
     }
