@@ -10,7 +10,9 @@ function renderDOM() {
     const todoTitle = myTodoRow.querySelector("#todo-title");
     const todoDate = myTodoRow.querySelector("#todo-date");
     const todoDetailsButton = myTodoRow.querySelector(".details");
+    const todoEditButton = myTodoRow.querySelector(".edit");
     todoDetailsButton.todoID = element.todoID;
+    todoEditButton.todoID = element.todoID;
     todoTitle.textContent = element.title;
     todoDate.textContent = element.dueDate;
     if (element.priority === "low") {

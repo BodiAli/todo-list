@@ -114,7 +114,8 @@ header > img {
 #submit-form {
   margin-left: 450px;
 }
-#textarea {
+#textarea,
+#textarea-edit {
   resize: none;
 }
 #title {

@@ -1,5 +1,5 @@
 import { todos } from "./storetodos.js";
-import { saveTodosOnEdit } from "./form-edit-submit.js";
+import { editTodos, saveTodosOnEdit } from "./form-edit-submit.js";
 const content = document.getElementById("content");
 const editTodoForm = document.getElementById("edit-todo");
 const darkOverlay = document.getElementById("dark-overlay");
@@ -15,12 +15,16 @@ function todoEditButton() {
   content.addEventListener("click", function (ev) {
     for (let i = 0; i < todos.length; i++) {
       const element = todos[i];
-      if (ev.target.todoID === element.id && ev.target.classList.contains("edit")) {
+      if (ev.target.todoID === element.todoID && ev.target.classList.contains("edit")) {
+        const resID = ev.target.todoID;
         editTodoForm.style.display = "block";
+        darkOverlay.classList.add("dark-overlay2");
         const res = todos.find(function (item) {
-          return item.todoID === ev.target.todoID;
+          return item.todoID === resID;
         });
-        console.log(res);
+        editTodos(res);
+        // Assuming only one match is needed, so we can break out of the loop
+        break;
       }
     }
   });
