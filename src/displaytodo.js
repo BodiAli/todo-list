@@ -24,6 +24,7 @@ function displayTodo() {
     const newTodoDate = newRow.querySelector("#todo-date");
     const detailsButton = newRow.querySelector("#details");
     detailsButton.classList.add(counter);
+    newTodoTitle.classList.add("todo-title" + counter);
     if (element.number === counter) {
       detailsButton.addEventListener("click", function (ev) {
         darkOverlay.classList.add("dark-overlay3");

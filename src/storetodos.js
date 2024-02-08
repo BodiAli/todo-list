@@ -4,17 +4,16 @@ let counter = 0;
 const lowPriorityButton = document.getElementById("low");
 const midPriorityButton = document.getElementById("mid");
 const highPriorityButton = document.getElementById("high");
+const form = document.getElementById("add-todo");
+const darkOverlay = document.getElementById("dark-overlay");
 export default function storeTodos() {
-  const form = document.getElementById("add-todo");
-  const darkOverlay = document.getElementById("dark-overlay");
-
   class Todos {
     constructor(title, description, dueDate, priority) {
       this.title = title;
       this.description = description;
       this.dueDate = dueDate;
       this.priority = priority;
-      this.number = counter;
+      this.todoID = todos.length + 1;
     }
     set todoTitle(value) {
       this.title = value;
