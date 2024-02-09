@@ -9,13 +9,27 @@ function todoCheckedButton() {
   const inputClicked = false;
   content.addEventListener("click", function (ev) {
     if (ev.target.tagName === "INPUT" && ev.target.checked) {
-      ev.target.parentElement.parentElement.parentElement.classList.add("text-secondary-subtle");
       ev.target.parentElement.parentElement.parentElement.querySelector("#details").classList.add("disabled");
       ev.target.parentElement.parentElement.parentElement
         .querySelector("#edit-button")
         .classList.add("disabled");
-      ev.target.parentElement.parentElement.parentElement.querySelector("#todo-title").style.text =
-        "strikethrough";
+      ev.target.parentElement.parentElement.parentElement.querySelector("#todo-title").style.textDecoration =
+        "line-through";
+      ev.target.parentElement.parentElement.parentElement
+        .querySelector("#todo-date")
+        .classList.add("text-secondary");
+    } else if (ev.target.tagName === "INPUT" && !ev.target.checked) {
+      ev.target.parentElement.parentElement.parentElement
+        .querySelector("#details")
+        .classList.remove("disabled");
+      ev.target.parentElement.parentElement.parentElement
+        .querySelector("#edit-button")
+        .classList.remove("disabled");
+      ev.target.parentElement.parentElement.parentElement.querySelector("#todo-title").style.textDecoration =
+        "none";
+      ev.target.parentElement.parentElement.parentElement
+        .querySelector("#todo-date")
+        .classList.remove("text-secondary");
     }
   });
 }

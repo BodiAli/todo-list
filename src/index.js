@@ -75,4 +75,46 @@ weekButton.addEventListener("click", function (ev) {
 projectsButton.addEventListener("click", function (ev) {
   clickedObj.projectsClicked = true;
   content.innerHTML = "";
+  const projectResultRow = document.createElement("div");
+  const projectResult = document.createElement("div");
+  const projectResultText = document.createElement("div");
+  const myH3 = document.createElement("h3");
+  const myParagraph = document.createElement("p");
+
+  projectResultRow.setAttribute("id", "project-result-row");
+  projectResultRow.classList.add("h-100");
+  projectResultRow.classList.add("row");
+  projectResultRow.classList.add("w-100");
+
+  projectResult.setAttribute("id", "project-result");
+  projectResult.classList.add("column");
+  projectResult.classList.add("col-6");
+  projectResult.classList.add("h-25");
+  projectResult.classList.add("mb-4");
+  projectResult.classList.add("border");
+  projectResult.classList.add("border-3");
+  projectResult.classList.add("border-dark");
+
+  projectResultText.classList.add("d-flex");
+  projectResultText.classList.add("justify-content-center");
+  projectResultText.classList.add("align-items-center");
+  projectResultText.classList.add("w-100");
+  projectResultText.classList.add("h-100");
+  projectResultText.classList.add("gap-3");
+
+  myH3.classList.add("mb-0");
+  myParagraph.classList.add("mb-0");
+  myParagraph.classList.add("fs-3");
+  myParagraph.classList.add("fw-bold");
+  myH3.textContent = "asdas:";
+  myParagraph.textContent = "zzzzz";
+  projectResultText.appendChild(myH3);
+  projectResultText.appendChild(myParagraph);
+  projectResult.appendChild(projectResultText);
+  projectResultRow.appendChild(projectResult);
+  content.appendChild(projectResultRow);
+});
+notesButton.addEventListener("click", function () {
+  clickedObj.notesClicked = true;
+  content.innerHTML = "";
 });
