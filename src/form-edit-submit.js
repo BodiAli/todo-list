@@ -1,9 +1,11 @@
 import { todos } from "./storetodos.js";
+import { renderDOM } from "./renderDOM.js";
 const editTodoForm = document.getElementById("edit-todo");
 const darkOverlay = document.getElementById("dark-overlay");
-function editTodos(element) {
-  editTodoForm.addEventListener("submit", saveEdit);
-  function saveEdit(ev) {
+
+function editTodos(todoID) {
+  const todoToEdit = todos.find((todo) => todo.todoID === todoID);
+  editTodoForm.addEventListener("submit", function saveEdit(ev) {
     ev.preventDefault();
     const titleEditValue = document.getElementById("title-edit").value;
     const descriptionEditValue = document.getElementById("textarea-edit").value;
@@ -11,19 +13,28 @@ function editTodos(element) {
     const lowPriorityEditButton = document.getElementById("low-edit");
     const midPriorityEditButton = document.getElementById("mid-edit");
     const highPriorityEditButton = document.getElementById("high-edit");
-    element.title = titleEditValue;
-    element.description = descriptionEditValue;
-    element.dueDate = dueDateEditValue;
+    if (titleEditValue !== "") {
+      todoToEdit.title = titleEditValue;
+    }
+    if (descriptionEditValue !== "") {
+      todoToEdit.description = descriptionEditValue;
+    }
+    if (dueDateEditValue !== "") {
+      todoToEdit.dueDate = dueDateEditValue;
+    }
+
     if (lowPriorityEditButton.style.border.includes("solid")) {
-      element.priority = "low";
+      todoToEdit.priority = "low";
     } else if (midPriorityEditButton.style.border.includes("solid")) {
-      element.priority = "mid";
+      todoToEdit.priority = "mid";
     } else if (highPriorityEditButton.style.border.includes("solid")) {
-      element.priority = "high";
+      todoToEdit.priority = "high";
     }
     editTodoForm.style.display = "none";
     darkOverlay.classList.remove("dark-overlay2");
-    console.log(element);
-  }
+    editTodoForm.removeEventListener("submit", saveEdit);
+    renderDOM();
+  });
 }
+
 export { editTodos };

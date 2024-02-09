@@ -1,13 +1,18 @@
 import { todos } from "./storetodos.js";
 import { editTodos, saveTodosOnEdit } from "./form-edit-submit.js";
+import { deleteTodo } from "./delete-todo.js";
 const content = document.getElementById("content");
 const editTodoForm = document.getElementById("edit-todo");
 const darkOverlay = document.getElementById("dark-overlay");
 const displayTodoDetailsModal = document.getElementById("display-details");
 function todoDeleteButton() {
   content.addEventListener("click", function (ev) {
-    if (ev.target.classList.contains("delete")) {
-      ev.target.parentElement.parentElement.parentElement.remove();
+    for (let i = 0; i < todos.length; i++) {
+      const element = todos[i];
+      if (ev.target.todoID === element.todoID && ev.target.classList.contains("delete")) {
+        const resID = ev.target.todoID;
+        deleteTodo(resID);
+      }
     }
   });
 }
@@ -19,15 +24,13 @@ function todoEditButton() {
         const resID = ev.target.todoID;
         editTodoForm.style.display = "block";
         darkOverlay.classList.add("dark-overlay2");
-        const res = todos.find(function (item) {
-          return item.todoID === resID;
-        });
-        editTodos(res);
+        editTodos(resID);
         break;
       }
     }
   });
 }
+
 function todoDetailsButton() {
   content.addEventListener("click", function (ev) {
     for (let i = 0; i < todos.length; i++) {
@@ -53,6 +56,11 @@ function todoDetailsButton() {
           displayTodoPriority.style.textAlign = "center";
           displayTodoPriority.style.backgroundColor = "rgba(255, 0, 0, 0.883)";
           displayTodoPriority.classList.add("fw-bold");
+        } else if (element.priority === undefined) {
+          displayTodoPriority.textContent = "NOT DEFINED";
+          displayTodoPriority.style.textAlign = "center";
+          displayTodoPriority.classList.add("fw-bold");
+          displayTodoPriority.classList.add("bg-secondary");
         }
         displayTodoDetailsModal.style.display = "block";
         darkOverlay.classList.add("dark-overlay3");

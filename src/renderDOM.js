@@ -11,7 +11,9 @@ function renderDOM() {
     const todoDate = myTodoRow.querySelector("#todo-date");
     const todoDetailsButton = myTodoRow.querySelector(".details");
     const todoEditButton = myTodoRow.querySelector(".edit");
+    const todoDeleteButton = myTodoRow.querySelector(".delete");
     todoDetailsButton.todoID = element.todoID;
+    todoDeleteButton.todoID = element.todoID;
     todoEditButton.todoID = element.todoID;
     todoTitle.textContent = element.title;
     todoDate.textContent = element.dueDate;
