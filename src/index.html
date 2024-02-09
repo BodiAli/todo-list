@@ -13,11 +13,18 @@
       <div class="row w-100 h-100 mx-0" id="main">
         <div class="column col-2 text-white" id="lists-col">
           <ul class="list-group" id="main-lists">
-            <li class="list-group-item">Home</li>
-            <li class="list-group-item">Today</li>
-            <li class="list-group-item">Week</li>
-            <li class="list-group-item">Projects</li>
-            <li class="list-group-item">Notes</li>
+            <li class="list-group-item" id="home-button">Home</li>
+            <li class="list-group-item" id="today-button">Today</li>
+            <li class="list-group-item" id="week-button">Week</li>
+            <li class="list-group-item" id="projects-button">Projects</li>
+            <ul class="list-group overflow-auto" id="projects">
+              <li class="list-group-item ms-3 text-secondary">lasdl</li>
+              <li class="list-group-item ms-3 text-secondary">lasdl</li>
+              <li class="list-group-item ms-3 text-secondary">lasdl</li>
+              <li class="list-group-item ms-3 text-secondary">lasdl</li>
+              <li class="list-group-item ms-3 text-secondary">lasdl</li>
+            </ul>
+            <li class="list-group-item" id="notes-button">Notes</li>
           </ul>
         </div>
         <div class="column col-10 p-4 position-relative" id="content">
@@ -30,7 +37,9 @@
                 >
               </div>
               <div class="input-group w-50 d-flex justify-content-end">
-                <button id="details" class="btn btn-outline-secondary border-0 text-black details">Details</button>
+                <button id="details" class="btn btn-outline-secondary border-0 text-black details">
+                  Details
+                </button>
                 <span class="input-group-text bg-secondary-subtle" id="todo-date">2024-20-12</span>
                 <button id="edit-button" class="btn btn-outline-secondary border-0 edit">
                   <i class="bi bi-pencil-fill"></i>
@@ -76,7 +85,7 @@
               </button>
             </div>
           </div>
-          <div class="card-footer h-25">Footer</div>
+          <div id="add-todo-footer" class="card-footer h-25">Footer</div>
         </div>
       </form>
       <form id="edit-todo" class="position-absolute">
@@ -114,18 +123,21 @@
         </div>
       </form>
       <div id="display-details" class="position-absolute">
-        <div class="card w-100">   
+        <div class="card w-100">
           <div class="card-body bg-secondary-subtle">
             <h4>Title:</h4>
             <p class="display-todo-title">Lorem ipsum dolor</p>
             <h4>Details:</h4>
-            <p class="display-todo-details">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum maxime molestias sunt.</p>
+            <p class="display-todo-details">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum maxime molestias sunt.
+            </p>
             <h4>Priority:</h4>
             <p class="display-todo-priority">Lorem</p>
-          </div>         
+          </div>
         </div>
-        <div id="footer" class="card-footer h-25 bg-secondary fw-semibold"><span class="ms-2">Todo Details</span></div>
-      </div>
+        <div id="footer" class="card-footer h-25 bg-secondary fw-semibold">
+          <span class="ms-2">Todo Details</span>
+        </div>
       </div>
     </div>
     <div id="dark-overlay"></div>

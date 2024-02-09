@@ -5,6 +5,20 @@ const content = document.getElementById("content");
 const editTodoForm = document.getElementById("edit-todo");
 const darkOverlay = document.getElementById("dark-overlay");
 const displayTodoDetailsModal = document.getElementById("display-details");
+function todoCheckedButton() {
+  const inputClicked = false;
+  content.addEventListener("click", function (ev) {
+    if (ev.target.tagName === "INPUT" && ev.target.checked) {
+      ev.target.parentElement.parentElement.parentElement.classList.add("text-secondary-subtle");
+      ev.target.parentElement.parentElement.parentElement.querySelector("#details").classList.add("disabled");
+      ev.target.parentElement.parentElement.parentElement
+        .querySelector("#edit-button")
+        .classList.add("disabled");
+      ev.target.parentElement.parentElement.parentElement.querySelector("#todo-title").style.text =
+        "strikethrough";
+    }
+  });
+}
 function todoDeleteButton() {
   content.addEventListener("click", function (ev) {
     for (let i = 0; i < todos.length; i++) {
@@ -69,4 +83,4 @@ function todoDetailsButton() {
   });
 }
 
-export { todoDeleteButton, todoEditButton, todoDetailsButton };
+export { todoDeleteButton, todoEditButton, todoDetailsButton, todoCheckedButton };
