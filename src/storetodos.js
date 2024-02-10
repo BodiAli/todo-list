@@ -53,8 +53,4 @@ function saveTodosOnSubmit() {
     darkOverlay.classList.remove("dark-overlay");
   }
 }
-function test() {
-  console.log();
-  console.log();
-}
-export { saveTodosOnSubmit, todos, test, todosToday, todosWeeks };
+export { saveTodosOnSubmit, todos, todosToday, todosWeeks };

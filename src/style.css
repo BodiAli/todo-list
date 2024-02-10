@@ -83,7 +83,8 @@ header > img {
 }
 .dark-overlay,
 .dark-overlay2,
-.dark-overlay3 {
+.dark-overlay3,
+.dark-overlay4 {
   position: fixed;
   top: 0;
   left: 0;
@@ -115,7 +116,8 @@ header > img {
   margin-left: 450px;
 }
 #textarea,
-#textarea-edit {
+#textarea-edit,
+#textarea-note {
   resize: none;
 }
 #title {
@@ -142,4 +144,30 @@ header > img {
   display: none;
   z-index: 1;
   width: 500px;
+}
+.custom-shadow {
+  box-shadow: 0 0 5px rgb(0, 0, 0);
+  transition: box-shadow 0.3s;
+}
+.custom-shadow:hover {
+  box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.985);
+}
+.border-note {
+  outline: none;
+  border-color: transparent;
+}
+.custom-line-break {
+  max-width: 200px;
+}
+#add-note {
+  top: 20%;
+  left: 32%;
+  display: none;
+  z-index: 1;
+  width: 500px;
+}
+#close-note {
+  position: absolute;
+  top: 4%;
+  left: 85%;
 }

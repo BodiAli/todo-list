@@ -4,8 +4,10 @@ import addImages from "./add-images.js";
 import getFormData from "./form-ui.js";
 import { todoDeleteButton, todoEditButton, todoDetailsButton, todoCheckedButton } from "./todo-buttons.js";
 import { editFormUI } from "./form-edit-ui.js";
-import { saveTodosOnSubmit, test } from "./storetodos.js";
+import { saveTodosOnSubmit } from "./storetodos.js";
 import { renderDOM, renderTodayTodos, renderWeeksTodos } from "./renderDOM.js";
+import { saveNotesOnSubmit } from "./add-note.js";
+import { noteDeleteButton } from "./delete-note.js";
 const addTodoButton = document.getElementById("add");
 const addForm = document.getElementById("add-todo");
 const editForm = document.getElementById("edit-todo");
@@ -17,6 +19,7 @@ const weekButton = document.getElementById("week-button");
 const projectsButton = document.getElementById("projects-button");
 const notesButton = document.getElementById("notes-button");
 const content = document.getElementById("content");
+const addNoteForm = document.getElementById("add-note");
 const clickedObj = {
   homeClicked: false,
   todayClicked: false,
@@ -33,11 +36,18 @@ todoDetailsButton();
 todoCheckedButton();
 editFormUI();
 saveTodosOnSubmit();
-test();
+saveNotesOnSubmit();
+noteDeleteButton();
 document.addEventListener("click", (ev) => {
   if (!addForm.contains(ev.target) && ev.target.tagName !== "I") {
     addForm.style.display = "none";
     darkOverlay.classList.remove("dark-overlay");
+  }
+});
+document.addEventListener("click", (ev) => {
+  if (!addNoteForm.contains(ev.target) && ev.target.tagName !== "I") {
+    addNoteForm.style.display = "none";
+    darkOverlay.classList.remove("dark-overlay4");
   }
 });
 document.addEventListener("click", (ev) => {
@@ -53,10 +63,12 @@ document.addEventListener("click", (ev) => {
   }
 });
 function showForm(ev) {
-  if (!clickedObj.projectsClicked) {
+  if (!clickedObj.projectsClicked && !clickedObj.notesClicked) {
     addForm.style.display = "block";
     darkOverlay.classList.add("dark-overlay");
-  } else if (!clickedObj.projectsClicked) {
+  } else if (clickedObj.notesClicked) {
+    addNoteForm.style.display = "block";
+    darkOverlay.classList.add("dark-overlay4");
   }
 }
 
@@ -85,10 +97,11 @@ projectsButton.addEventListener("click", function (ev) {
   projectResultRow.classList.add("h-100");
   projectResultRow.classList.add("row");
   projectResultRow.classList.add("w-100");
+  projectResultRow.classList.add("gap-3");
 
   projectResult.setAttribute("id", "project-result");
   projectResult.classList.add("column");
-  projectResult.classList.add("col-6");
+  projectResult.classList.add("col-5");
   projectResult.classList.add("h-25");
   projectResult.classList.add("mb-4");
   projectResult.classList.add("border");
@@ -112,8 +125,10 @@ projectsButton.addEventListener("click", function (ev) {
   projectResultText.appendChild(myParagraph);
   projectResult.appendChild(projectResultText);
   projectResultRow.appendChild(projectResult);
+
   content.appendChild(projectResultRow);
 });
+
 notesButton.addEventListener("click", function () {
   clickedObj.notesClicked = true;
   content.innerHTML = "";
