@@ -17,18 +17,18 @@ function addNote() {
   const myCloseNoteButton = document.createElement("button");
   myCloseNoteButton.setAttribute("id", "close-note");
   myCloseNoteButton.classList.add("btn-close");
-  noteResultRow.setAttribute("id", "project-result-row");
+  noteResultRow.setAttribute("id", "note-result-row");
   noteResultRow.classList.add("h-100");
   noteResultRow.classList.add("row");
   noteResultRow.classList.add("w-100");
   noteResultRow.classList.add("gap-4");
 
-  noteResult.setAttribute("id", "project-result");
+  noteResult.setAttribute("id", "note-result");
   noteResult.classList.add("column");
   noteResult.classList.add("col-6");
   noteResult.classList.add("h-50");
   noteResult.classList.add("w-25");
-  noteResult.classList.add("mb-4");
+  noteResult.classList.add("mb-1");
   noteResult.classList.add("border");
   noteResult.classList.add("border-3");
   noteResult.classList.add("border-dark");
@@ -43,23 +43,32 @@ function addNote() {
   noteResultText.classList.add("w-100");
   noteResultText.classList.add("h-100");
   noteResultText.classList.add("gap-3");
-  noteResultText.classList.add("p-3");
+  noteResultText.classList.add("pe-3");
+  noteResultText.classList.add("pt-3");
+  noteResultText.classList.add("pb-3");
 
   myDivTitleNote.classList.add("mb-0");
-  myDivTitleNote.classList.add("fs-3");
+  myDivTitleNote.classList.add("fs-4");
   myDivTitleNote.classList.add("custom-line-break");
   myDivTitleNote.classList.add("border-note");
   myDivTitleNote.classList.add("fw-bold");
   myDivTitleNote.classList.add("note-title");
+  myDivTitleNote.classList.add("ps-2");
+  myDivTitleNote.classList.add("pe-2");
   myDivTitleNote.setAttribute("contenteditable", "true");
+  myDivTitleNote.setAttribute("spellcheck", "false");
+
+  myDivTitleNote.style.outline = "2px dotted gray";
+
   myDivParagraphNote.classList.add("mb-0");
-  myDivParagraphNote.classList.add("fs-3");
+  myDivParagraphNote.classList.add("fs-5");
   myDivParagraphNote.classList.add("h-100");
   myDivParagraphNote.classList.add("w-100");
   myDivParagraphNote.classList.add("overflow-auto");
   myDivParagraphNote.classList.add("border-note");
   myDivParagraphNote.classList.add("note-paragraph");
   myDivParagraphNote.setAttribute("contenteditable", "true");
+  myDivParagraphNote.setAttribute("spellcheck", "false");
   noteResultText.appendChild(myDivTitleNote);
   noteResultText.appendChild(myDivParagraphNote);
   noteResult.appendChild(myCloseNoteButton);
@@ -69,17 +78,17 @@ function addNote() {
 
   for (let i = 0; i < notes.length; i++) {
     const element = notes[i];
-    const newNoteResultRow = noteResult.cloneNode(true);
-    const newDivNote = newNoteResultRow.querySelector(".note-title");
-    const newDivParagraph = newNoteResultRow.querySelector(".note-paragraph");
-    const newCloseNoteButton = newNoteResultRow.querySelector(".btn-close");
+    const newNoteResult = noteResult.cloneNode(true);
+    const newDivNote = newNoteResult.querySelector(".note-title");
+    const newDivParagraph = newNoteResult.querySelector(".note-paragraph");
+    const newCloseNoteButton = newNoteResult.querySelector(".btn-close");
     newCloseNoteButton.noteID = element.noteID;
     newDivNote.textContent = element.title;
     newDivParagraph.textContent = element.details;
     newDivNote.addEventListener("input", function () {
       limitText(this, 25);
     });
-    noteResultRow.appendChild(newNoteResultRow);
+    noteResultRow.appendChild(newNoteResult);
   }
 }
 function limitText(element, maxLength) {
