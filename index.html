@@ -139,6 +139,33 @@
           <span class="ms-2">Todo Details</span>
         </div>
       </div>
+      <!--Add Note-->
+      <form id="add-note" class="position-absolute">
+        <div class="card note w-100">
+          <div class="card-body text-black note">
+            <div class="form-floating">
+              <input
+                type="text"
+                id="add-note-title"
+                class="form-control card-title d-block border-0 bg-transparent w-50"
+                placeholder="Place Title here"
+              />
+              <label for="add-note-title">Title</label>
+            </div>
+            <div class="form-floating h-25 mb-5">
+              <textarea
+                id="textarea-note"
+                class="form-control h-100 d-block w-100 border-0 bg-transparent"
+              ></textarea>
+              <label for="textarea-note">Details: e.g (rent, cleaning, meeting)</label>
+            </div>
+            <button id="add-note-button" type="submit" class="btn btn-primary flex-grow-0 rounded-2 btn-sm">
+              Add Note
+            </button>
+          </div>
+          <div id="footer" class="card-footer h-25">Add Note</div>
+        </div>
+      </form>
     </div>
     <div id="dark-overlay"></div>
   </body>
