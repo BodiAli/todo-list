@@ -186,6 +186,48 @@
           <div id="footer" class="card-footer h-25">Create Project</div>
         </div>
       </form>
+      <!--Add todo in project-->
+      <form id="add-todo-in-project" class="position-absolute">
+        <div class="card add-in-project">
+          <div class="card-body card-img-overlay add-in-project text-black">
+            <div class="form-floating">
+              <input
+                type="text"
+                id="title-in-project"
+                class="form-control card-title d-block border-0 bg-transparent w-50"
+                placeholder="Place Title here"
+                required
+              />
+              <label for="title-in-project">Title</label>
+            </div>
+            <div class="form-floating h-50 mb-3">
+              <textarea
+                id="textarea-in-project"
+                class="form-control h-100 d-block w-100 border-0 bg-transparent"
+              ></textarea>
+              <label for="textarea">Details: e.g (rent, cleaning, meeting)</label>
+            </div>
+            <span>Due Date:</span>
+            <input id="date-in-project" class="mb-4 form-control w-25 d-inline" type="date" required />
+            <div class="btn-group d-flex gap-5 align-items-end">
+              <span class="align-text-top"><br />Priority:</span>
+              <button id="low-in-project" class="btn btn-success text-black fw-bold flex-grow-0 rounded-5">
+                Low
+              </button>
+              <button id="mid-in-project" class="btn btn-warning text-black fw-bold flex-grow-0 rounded-5">
+                Mid
+              </button>
+              <button id="high-in-project" class="btn btn-danger text-black fw-bold flex-grow-0 rounded-5">
+                High
+              </button>
+              <button type="submit" id="submit-form-in-project" class="btn btn-primary flex-grow-0 rounded-2">
+                Add Todo
+              </button>
+            </div>
+          </div>
+          <div id="add-todo-footer" class="card-footer h-25">Add in Project</div>
+        </div>
+      </form>
     </div>
     <div id="dark-overlay"></div>
   </body>
