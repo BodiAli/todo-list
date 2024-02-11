@@ -9,6 +9,7 @@ import { renderDOM, renderTodayTodos, renderWeeksTodos } from "./renderDOM.js";
 import { saveNotesOnSubmit, addNote } from "./add-note.js";
 import { noteDeleteButton } from "./delete-note.js";
 import { saveProjectsOnSubmit } from "./add-projects.js";
+import { projectDeleteButton } from "./delete-project.js";
 const addTodoButton = document.getElementById("add");
 const addForm = document.getElementById("add-todo");
 const editForm = document.getElementById("edit-todo");
@@ -27,6 +28,7 @@ const clickedObj = {
   todayClicked: false,
   weekClicked: false,
   projectsClicked: false,
+  thisProjectClicked: false,
   notesClicked: false,
 };
 addTodoButton.addEventListener("click", showForm);
@@ -41,6 +43,7 @@ saveTodosOnSubmit();
 saveNotesOnSubmit();
 noteDeleteButton();
 saveProjectsOnSubmit();
+projectDeleteButton();
 document.addEventListener("click", (ev) => {
   if (!addForm.contains(ev.target) && ev.target.tagName !== "I") {
     addForm.style.display = "none";
@@ -72,7 +75,7 @@ document.addEventListener("click", (ev) => {
   }
 });
 function showForm(ev) {
-  if (!clickedObj.projectsClicked && !clickedObj.notesClicked) {
+  if (!clickedObj.projectsClicked && !clickedObj.notesClicked && !clickedObj.thisProjectClicked) {
     addForm.style.display = "block";
     darkOverlay.classList.add("dark-overlay");
   } else if (clickedObj.notesClicked) {
@@ -89,6 +92,7 @@ homeButton.addEventListener("click", function (ev) {
   clickedObj.todayClicked = true;
   clickedObj.weekClicked = true;
   clickedObj.projectsClicked = false;
+  clickedObj.thisProjectClicked = false;
   clickedObj.notesClicked = false;
   content.innerHTML = "";
   renderDOM();
@@ -98,6 +102,7 @@ todayButton.addEventListener("click", function (ev) {
   clickedObj.todayClicked = true;
   clickedObj.weekClicked = true;
   clickedObj.projectsClicked = false;
+  clickedObj.thisProjectClicked = false;
   clickedObj.notesClicked = false;
   content.innerHTML = "";
   renderTodayTodos();
@@ -107,6 +112,7 @@ weekButton.addEventListener("click", function (ev) {
   clickedObj.todayClicked = true;
   clickedObj.weekClicked = true;
   clickedObj.projectsClicked = false;
+  clickedObj.thisProjectClicked = false;
   clickedObj.notesClicked = false;
   content.innerHTML = "";
   renderWeeksTodos();
@@ -116,6 +122,7 @@ projectsButton.addEventListener("click", function (ev) {
   clickedObj.todayClicked = false;
   clickedObj.weekClicked = false;
   clickedObj.projectsClicked = true;
+  clickedObj.thisProjectClicked = false;
   clickedObj.notesClicked = false;
   content.innerHTML = "";
 });
@@ -125,7 +132,10 @@ notesButton.addEventListener("click", function () {
   clickedObj.todayClicked = false;
   clickedObj.weekClicked = false;
   clickedObj.projectsClicked = false;
+  clickedObj.thisProjectClicked = false;
   clickedObj.notesClicked = true;
   content.innerHTML = "";
   addNote();
 });
+
+export { clickedObj };

@@ -87,6 +87,10 @@ function addNote() {
     newDivParagraph.textContent = element.details;
     newDivNote.addEventListener("input", function () {
       limitText(this, 25);
+      element.title = newDivNote.textContent;
+    });
+    newDivParagraph.addEventListener("input", function () {
+      element.details = newDivParagraph.textContent;
     });
     noteResultRow.appendChild(newNoteResult);
   }
@@ -103,7 +107,6 @@ function saveNotesOnSubmit() {
     const addNoteDetails = document.getElementById("textarea-note").value;
     const note = new Note(addNoteTitle, addNoteDetails);
     notes.push(note);
-    console.log(notes);
     addNoteForm.style.display = "none";
     darkOverlay.classList.remove("dark-overlay4");
     addNote();

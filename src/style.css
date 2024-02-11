@@ -39,9 +39,13 @@ header > img {
 .list-group-item {
   background-color: inherit;
   border: none;
+}
+.list-group-item.main {
+  background-color: inherit;
+  border: none;
   color: #e36300;
 }
-.list-group-item:hover {
+.list-group-item.main:hover {
   color: #d79f7f;
   cursor: pointer;
 }

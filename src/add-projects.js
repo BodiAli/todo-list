@@ -1,7 +1,10 @@
 import background from "./images/project-background.png";
+import { renderDOM } from "./renderDOM";
+import { clickedObj } from "./index.js";
 const content = document.getElementById("content");
 const darkOverlay = document.getElementById("dark-overlay");
 const addProjectForm = document.getElementById("add-project");
+const projectsList = document.getElementById("projects");
 const projects = [];
 class Project {
   constructor(title) {
@@ -17,6 +20,7 @@ function addProject() {
   const myDeleteProjectButton = document.createElement("button");
   myDeleteProjectButton.setAttribute("id", "delete-project");
   myDeleteProjectButton.classList.add("btn-close");
+  myDeleteProjectButton.classList.add("delete-project");
   projectResultRow.setAttribute("id", "project-result-row");
   projectResultRow.classList.add("h-100");
   projectResultRow.classList.add("row");
@@ -40,7 +44,6 @@ function addProject() {
   projectResultText.classList.add("align-items-center");
   projectResultText.classList.add("w-100");
   projectResultText.classList.add("h-100");
-  // projectResultText.classList.add("gap-3");
 
   myH3.classList.add("mb-0");
   myH3.classList.add("project-title");
@@ -55,9 +58,30 @@ function addProject() {
     const newDivProjectTitle = newProjectResult.querySelector(".project-title");
     newProjectResult.style.backgroundImage = `url(${background})`;
     const newCloseProjectButton = newProjectResult.querySelector(".delete-project");
+    newCloseProjectButton.projectID = element.projectID;
     newDivProjectTitle.textContent = element.title;
     projectResultRow.appendChild(newProjectResult);
   }
+}
+function addProjectName() {
+  projectsList.innerHTML = "";
+  projects.forEach(function (project) {
+    const newList = document.createElement("li");
+    newList.classList.add("list-group-item");
+    newList.classList.add("ms-3");
+    newList.classList.add("text-secondary");
+    newList.textContent = project.title;
+    newList.addEventListener("click", function (ev) {
+      clickedObj.homeClicked = false;
+      clickedObj.todayClicked = false;
+      clickedObj.weekClicked = false;
+      clickedObj.projectsClicked = false;
+      clickedObj.thisProjectClicked = true;
+      clickedObj.notesClicked = false;
+      content.innerHTML = "";
+    });
+    projectsList.appendChild(newList);
+  });
 }
 function saveProjectsOnSubmit() {
   addProjectForm.addEventListener("submit", function (ev) {
@@ -69,6 +93,7 @@ function saveProjectsOnSubmit() {
     addProjectForm.style.display = "none";
     darkOverlay.classList.remove("dark-overlay5");
     addProject();
+    addProjectName();
   });
 }
-export { saveProjectsOnSubmit, projects };
+export { saveProjectsOnSubmit, projects, addProject, addProjectName };
