@@ -1,6 +1,7 @@
 import background from "./images/project-background.png";
-import { renderDOM } from "./renderDOM";
+import { renderDOM, renderProjectTodo } from "./renderDOM";
 import { clickedObj } from "./index.js";
+import { todosProject } from "./storetodos.js";
 const content = document.getElementById("content");
 const darkOverlay = document.getElementById("dark-overlay");
 const addProjectForm = document.getElementById("add-project");
@@ -72,6 +73,9 @@ function addProjectName() {
     newList.classList.add("text-secondary");
     newList.textContent = project.title;
     newList.addEventListener("click", function (ev) {
+      const array = [];
+      array.ID = ev.target.textContent;
+      console.log(array, array.ID);
       clickedObj.homeClicked = false;
       clickedObj.todayClicked = false;
       clickedObj.weekClicked = false;
@@ -79,6 +83,8 @@ function addProjectName() {
       clickedObj.thisProjectClicked = true;
       clickedObj.notesClicked = false;
       content.innerHTML = "";
+      if (ev.target.textContent === array.ID) {
+      }
     });
     projectsList.appendChild(newList);
   });

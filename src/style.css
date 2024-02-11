@@ -89,7 +89,8 @@ header > img {
 .dark-overlay2,
 .dark-overlay3,
 .dark-overlay4,
-.dark-overlay5 {
+.dark-overlay5,
+.dark-overlay6 {
   position: fixed;
   top: 0;
   left: 0;
@@ -112,7 +113,8 @@ header > img {
   width: 80vw;
 }
 #form-background,
-#form-background-edit {
+#form-background-edit,
+#form-background-project {
   height: 90%;
   opacity: 0.1;
   filter: brightness(110%) contrast(150%);
@@ -219,4 +221,14 @@ header > img {
 
 #delete-project:focus {
   outline: 2px solid gray;
+}
+#add-todo-in-project {
+  top: 10%;
+  left: 10%;
+  display: none;
+  z-index: 1;
+}
+.card.add-in-project {
+  height: 80vh;
+  width: 80vw;
 }

@@ -7,8 +7,10 @@ export default function addImages() {
   const head = document.querySelector("head");
   const cardBodyAdd = document.querySelector(".card-body.card-img-overlay.add");
   const cardBodyEdit = document.querySelector(".card-body.card-img-overlay.edit");
+  const cardBodyProject = document.querySelector(".card-body.card-img-overlay.add-in-project");
   const cardElementAdd = document.querySelector(".card.add");
   const cardElementEdit = document.querySelector(".card.edit");
+  const cardElementProject = document.querySelector(".card.add-in-project");
   const linkTag = document.createElement("link");
   const formBackgroundImageAdd = new Image();
   formBackgroundImageAdd.src = todoBackground;
@@ -18,6 +20,10 @@ export default function addImages() {
   formBackgroundImageEdit.src = todoBackground;
   formBackgroundImageEdit.classList.add("card-img");
   formBackgroundImageEdit.setAttribute("id", "form-background-edit");
+  const formBackgroundImageProject = new Image();
+  formBackgroundImageProject.src = todoBackground;
+  formBackgroundImageProject.classList.add("card-img");
+  formBackgroundImageProject.setAttribute("id", "form-background-project");
   linkTag.rel = "icon";
   linkTag.href = tabIcon;
   const iconHeader = new Image();
@@ -27,4 +33,5 @@ export default function addImages() {
   head.appendChild(linkTag);
   cardElementAdd.insertBefore(formBackgroundImageAdd, cardBodyAdd);
   cardElementEdit.insertBefore(formBackgroundImageEdit, cardBodyEdit);
+  cardElementProject.insertBefore(formBackgroundImageProject, cardBodyProject);
 }

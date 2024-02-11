@@ -23,6 +23,7 @@ const notesButton = document.getElementById("notes-button");
 const content = document.getElementById("content");
 const addNoteForm = document.getElementById("add-note");
 const addProjectForm = document.getElementById("add-project");
+const addTodoInProject = document.getElementById("add-todo-in-project");
 const clickedObj = {
   homeClicked: false,
   todayClicked: false,
@@ -84,6 +85,9 @@ function showForm(ev) {
   } else if (clickedObj.projectsClicked) {
     addProjectForm.style.display = "block";
     darkOverlay.classList.add("dark-overlay5");
+  } else if (clickedObj.thisProjectClicked) {
+    addTodoInProject.style.display = "block";
+    darkOverlay.classList.add("dark-overlay6");
   }
 }
 
