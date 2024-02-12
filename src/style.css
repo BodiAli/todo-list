@@ -124,7 +124,8 @@ header > img {
 }
 #textarea,
 #textarea-edit,
-#textarea-note {
+#textarea-note,
+#textarea-in-project {
   resize: none;
 }
 #title {
@@ -231,4 +232,11 @@ header > img {
 .card.add-in-project {
   height: 80vh;
   width: 80vw;
+}
+.project-lists {
+  color: gray;
+}
+.project-lists:hover {
+  color: white;
+  cursor: pointer;
 }

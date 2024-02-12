@@ -1,17 +1,22 @@
 import background from "./images/project-background.png";
 import { renderDOM, renderProjectTodo } from "./renderDOM";
 import { clickedObj } from "./index.js";
-import { todosProject } from "./storetodos.js";
+import { todosProject, Todos, todos } from "./storetodos.js";
 const content = document.getElementById("content");
 const darkOverlay = document.getElementById("dark-overlay");
 const addProjectForm = document.getElementById("add-project");
 const projectsList = document.getElementById("projects");
+const addTodoInProjectForm = document.getElementById("add-todo-in-project");
+const lowPriorityButtonProject = document.getElementById("low-in-project");
+const midPriorityButtonProject = document.getElementById("mid-in-project");
+const highPriorityButtonProject = document.getElementById("high-in-project");
 const projects = [];
 class Project {
-  constructor(title) {
-    (this.title = title), (this.projectID = projects.length + 1);
+  constructor(title, todos) {
+    (this.title = title), (this.projectTodos = todos), (this.projectID = projects.length + 1);
   }
 }
+
 function addProject() {
   content.innerHTML = "";
   const projectResultRow = document.createElement("div");
@@ -64,27 +69,90 @@ function addProject() {
     projectResultRow.appendChild(newProjectResult);
   }
 }
+
+function saveTodosOnProjectFormSubmit(resID, project) {
+  const saveTodoInProject = function (ev) {
+    ev.preventDefault();
+    const todoTitleInProjectValue = document.getElementById("title-in-project").value;
+    const todoDetailsInProjectValue = document.getElementById("textarea-in-project").value;
+    const todoDateInProjectValue = document.getElementById("date-in-project").value;
+    let priority;
+    if (lowPriorityButtonProject.style.border.includes("solid")) {
+      priority = "low";
+    } else if (midPriorityButtonProject.style.border.includes("solid")) {
+      priority = "mid";
+    } else if (highPriorityButtonProject.style.border.includes("solid")) {
+      priority = "high";
+    }
+    if (resID !== project.projectID) {
+      console.log(resID, project.projectID, "faaaaaalse");
+      return;
+    } else if (resID === project.projectID) {
+      const todo = new Todos(
+        todoTitleInProjectValue,
+        todoDetailsInProjectValue,
+        todoDateInProjectValue,
+        priority
+      );
+      console.log(resID, project.projectID, "trueeee");
+      todos.push(todo);
+      project.projectTodos.push(todo);
+      console.log(project);
+      renderProjectTodo(project.projectTodos);
+      addTodoInProjectForm.style.display = "none";
+      darkOverlay.classList.remove("dark-overlay6");
+    }
+  };
+
+  addTodoInProjectForm.addEventListener("submit", saveTodoInProject);
+
+  return saveTodoInProject;
+}
+
 function addProjectName() {
   projectsList.innerHTML = "";
+  let saveTodoInProject = null;
   projects.forEach(function (project) {
+    project.projectTodos = [];
+    let resID;
+    let footer;
     const newList = document.createElement("li");
     newList.classList.add("list-group-item");
     newList.classList.add("ms-3");
-    newList.classList.add("text-secondary");
+    newList.classList.add("project-lists");
     newList.textContent = project.title;
-    newList.addEventListener("click", function (ev) {
-      const array = [];
-      array.ID = ev.target.textContent;
-      console.log(array, array.ID);
+    newList.projectID = project.projectID;
+    newList.addEventListener("click", function listClick(ev) {
       clickedObj.homeClicked = false;
       clickedObj.todayClicked = false;
       clickedObj.weekClicked = false;
       clickedObj.projectsClicked = false;
       clickedObj.thisProjectClicked = true;
       clickedObj.notesClicked = false;
+      console.log(project, newList.projectID);
+
+      footer = addTodoInProjectForm.querySelector("#add-todo-in-project-footer");
+      footer.textContent = newList.textContent;
+      const allListItems = document.querySelectorAll(".project-lists");
+      allListItems.forEach((item) => {
+        item.style.border = "none";
+      });
+      newList.style.border = "2px solid black";
+
       content.innerHTML = "";
-      if (ev.target.textContent === array.ID) {
+      resID = ev.target.projectID;
+      if (ev.target.projectID === project.projectID) {
+        if (project.projectTodos !== undefined) {
+          renderProjectTodo(project.projectTodos);
+        }
       }
+      // saveTodosOnProjectFormSubmit(resID, project, footer, newList);
+      if (saveTodoInProject !== null) {
+        addTodoInProjectForm.removeEventListener("submit", saveTodoInProject);
+      }
+
+      // Add the event listener for this specific project
+      saveTodoInProject = saveTodosOnProjectFormSubmit(resID, project);
     });
     projectsList.appendChild(newList);
   });
@@ -95,11 +163,10 @@ function saveProjectsOnSubmit() {
     const addProjectTitle = document.getElementById("add-project-title").value;
     const project = new Project(addProjectTitle);
     projects.push(project);
-    console.log(projects);
     addProjectForm.style.display = "none";
     darkOverlay.classList.remove("dark-overlay5");
     addProject();
     addProjectName();
   });
 }
-export { saveProjectsOnSubmit, projects, addProject, addProjectName };
+export { saveProjectsOnSubmit, projects, addProject, addProjectName, addTodoInProjectForm };

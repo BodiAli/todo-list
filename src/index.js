@@ -8,7 +8,7 @@ import { saveTodosOnSubmit } from "./storetodos.js";
 import { renderDOM, renderTodayTodos, renderWeeksTodos } from "./renderDOM.js";
 import { saveNotesOnSubmit, addNote } from "./add-note.js";
 import { noteDeleteButton } from "./delete-note.js";
-import { saveProjectsOnSubmit } from "./add-projects.js";
+import { addProject, saveProjectsOnSubmit } from "./add-projects.js";
 import { projectDeleteButton } from "./delete-project.js";
 const addTodoButton = document.getElementById("add");
 const addForm = document.getElementById("add-todo");
@@ -49,6 +49,12 @@ document.addEventListener("click", (ev) => {
   if (!addForm.contains(ev.target) && ev.target.tagName !== "I") {
     addForm.style.display = "none";
     darkOverlay.classList.remove("dark-overlay");
+  }
+});
+document.addEventListener("click", (ev) => {
+  if (!addTodoInProject.contains(ev.target) && ev.target.tagName !== "I") {
+    addTodoInProject.style.display = "none";
+    darkOverlay.classList.remove("dark-overlay6");
   }
 });
 document.addEventListener("click", (ev) => {
@@ -129,6 +135,7 @@ projectsButton.addEventListener("click", function (ev) {
   clickedObj.thisProjectClicked = false;
   clickedObj.notesClicked = false;
   content.innerHTML = "";
+  addProject();
 });
 
 notesButton.addEventListener("click", function () {

@@ -1,5 +1,6 @@
-import { projects, addProject, addProjectName } from "./add-projects";
+import { projects, addProject, addProjectName, addTodoInProjectForm } from "./add-projects";
 const content = document.getElementById("content");
+let saveTodoInProject = null;
 function projectDeleteButton() {
   content.addEventListener("click", function (ev) {
     for (let i = 0; i < projects.length; i++) {
@@ -13,6 +14,9 @@ function projectDeleteButton() {
         console.log(projects);
         addProject();
         addProjectName();
+        if (saveTodoInProject !== null) {
+          addTodoInProjectForm.removeEventListener("submit", saveTodoInProject);
+        }
       }
     }
   });
