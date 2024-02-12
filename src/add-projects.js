@@ -1,7 +1,9 @@
 import background from "./images/project-background.png";
 import { renderDOM, renderProjectTodo } from "./renderDOM";
 import { clickedObj } from "./index.js";
-import { todosProject, Todos, todos } from "./storetodos.js";
+import { differenceInDays, differenceInHours } from "date-fns";
+import { todosProject, Todos, todos, todosToday, todosWeeks } from "./storetodos.js";
+import { editTodos } from "./form-edit-submit.js";
 const content = document.getElementById("content");
 const darkOverlay = document.getElementById("dark-overlay");
 const addProjectForm = document.getElementById("add-project");
@@ -10,6 +12,7 @@ const addTodoInProjectForm = document.getElementById("add-todo-in-project");
 const lowPriorityButtonProject = document.getElementById("low-in-project");
 const midPriorityButtonProject = document.getElementById("mid-in-project");
 const highPriorityButtonProject = document.getElementById("high-in-project");
+const currentDate = new Date();
 const projects = [];
 class Project {
   constructor(title, todos) {
@@ -94,10 +97,17 @@ function saveTodosOnProjectFormSubmit(resID, project) {
         todoDateInProjectValue,
         priority
       );
-      console.log(resID, project.projectID, "trueeee");
       todos.push(todo);
       project.projectTodos.push(todo);
-      console.log(project);
+      if(((differenceInDays(todo.dueDate, currentDate)) < 7) && ((differenceInDays(todo.dueDate, currentDate)) >= 0)){
+        console.log(differenceInDays(todo.dueDate, currentDate))
+        todosWeeks.push(todo)
+      }
+      if (((differenceInHours(todo.dueDate, currentDate) >= 0) && (differenceInHours(todo.dueDate, currentDate) <= 24))||((differenceInHours(todo.dueDate, currentDate) <= 0) && (differenceInHours(todo.dueDate, currentDate) >= -24))){
+        console.log(differenceInHours(todo.dueDate, currentDate));
+        todosToday.push(todo);   
+      }
+  
       renderProjectTodo(project.projectTodos);
       addTodoInProjectForm.style.display = "none";
       darkOverlay.classList.remove("dark-overlay6");
@@ -112,8 +122,19 @@ function saveTodosOnProjectFormSubmit(resID, project) {
 function addProjectName() {
   projectsList.innerHTML = "";
   let saveTodoInProject = null;
+  console.log(projects)
   projects.forEach(function (project) {
-    project.projectTodos = [];
+    // if(project.projectTodos.length == "") {
+      //   console.log("hii")
+      // }
+    if ((project.projectTodos == "")){ 
+      project.projectTodos = []
+      console.log("hiii")
+    }
+    // if (project.projectTodos == ""){
+    //   project.projectTodos = []
+    // }
+    
     let resID;
     let footer;
     const newList = document.createElement("li");
@@ -122,6 +143,8 @@ function addProjectName() {
     newList.classList.add("project-lists");
     newList.textContent = project.title;
     newList.projectID = project.projectID;
+    
+
     newList.addEventListener("click", function listClick(ev) {
       clickedObj.homeClicked = false;
       clickedObj.todayClicked = false;
@@ -129,7 +152,6 @@ function addProjectName() {
       clickedObj.projectsClicked = false;
       clickedObj.thisProjectClicked = true;
       clickedObj.notesClicked = false;
-      console.log(project, newList.projectID);
 
       footer = addTodoInProjectForm.querySelector("#add-todo-in-project-footer");
       footer.textContent = newList.textContent;
@@ -144,14 +166,13 @@ function addProjectName() {
       if (ev.target.projectID === project.projectID) {
         if (project.projectTodos !== undefined) {
           renderProjectTodo(project.projectTodos);
+          
         }
       }
-      // saveTodosOnProjectFormSubmit(resID, project, footer, newList);
       if (saveTodoInProject !== null) {
         addTodoInProjectForm.removeEventListener("submit", saveTodoInProject);
       }
 
-      // Add the event listener for this specific project
       saveTodoInProject = saveTodosOnProjectFormSubmit(resID, project);
     });
     projectsList.appendChild(newList);

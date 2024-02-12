@@ -1,8 +1,12 @@
-import { todos } from "./storetodos.js";
-import { renderDOM } from "./renderDOM.js";
+import { todos,todosWeeks,todosToday } from "./storetodos.js";
+import { renderDOM, renderProjectTodo } from "./renderDOM.js";
+import { clickedObj } from "./index.js";
+import { addProjectName, projects } from "./add-projects.js";
+import { differenceInDays, differenceInHours } from "date-fns";
 const editTodoForm = document.getElementById("edit-todo");
 const darkOverlay = document.getElementById("dark-overlay");
-
+const content = document.getElementById("content");
+const currentDate = new Date();
 function editTodos(todoID) {
   const todoToEdit = todos.find((todo) => todo.todoID === todoID);
   editTodoForm.addEventListener("submit", function saveEdit(ev) {
@@ -30,9 +34,27 @@ function editTodos(todoID) {
     } else if (highPriorityEditButton.style.border.includes("solid")) {
       todoToEdit.priority = "high";
     }
+    if(((differenceInDays(todoToEdit.dueDate, currentDate)) < 7) && ((differenceInDays(todoToEdit.dueDate, currentDate)) >= 0)){
+      console.log(differenceInDays(todoToEdit.dueDate, currentDate))
+      todosWeeks.push(todoToEdit)
+    }
+    if (((differenceInHours(todoToEdit.dueDate, currentDate) >= 0) && (differenceInHours(todoToEdit.dueDate, currentDate) <= 24))||((differenceInHours(todoToEdit.dueDate, currentDate) <= 0) && (differenceInHours(todoToEdit.dueDate, currentDate) >= -24))){
+      console.log(differenceInHours(todoToEdit.dueDate, currentDate));
+      todosToday.push(todoToEdit);   
+    }
+
     editTodoForm.style.display = "none";
     darkOverlay.classList.remove("dark-overlay2");
     editTodoForm.removeEventListener("submit", saveEdit);
+    if (projects !== "" && clickedObj.thisProjectClicked) {
+      for (let i = 0; i < projects.length; i++) {
+        const project = projects[i];
+        if (project.projectTodos.includes(todoToEdit)) {
+          renderProjectTodo(project.projectTodos);
+        }
+      }
+      return;
+    }
     renderDOM();
   });
 }
