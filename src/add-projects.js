@@ -15,8 +15,8 @@ const highPriorityButtonProject = document.getElementById("high-in-project");
 const currentDate = new Date();
 const projects = [];
 class Project {
-  constructor(title, todos) {
-    (this.title = title), (this.projectTodos = todos), (this.projectID = projects.length + 1);
+  constructor(title) {
+    (this.title = title), (this.projectTodos = []), (this.projectID = projects.length + 1);
   }
 }
 
@@ -75,6 +75,7 @@ function addProject() {
 
 function saveTodosOnProjectFormSubmit(resID, project) {
   const saveTodoInProject = function (ev) {
+    
     ev.preventDefault();
     const todoTitleInProjectValue = document.getElementById("title-in-project").value;
     const todoDetailsInProjectValue = document.getElementById("textarea-in-project").value;
@@ -97,6 +98,7 @@ function saveTodosOnProjectFormSubmit(resID, project) {
         todoDateInProjectValue,
         priority
       );
+      console.log(resID, project.projectID)
       todos.push(todo);
       project.projectTodos.push(todo);
       if(((differenceInDays(todo.dueDate, currentDate)) < 7) && ((differenceInDays(todo.dueDate, currentDate)) >= 0)){
@@ -112,6 +114,7 @@ function saveTodosOnProjectFormSubmit(resID, project) {
       addTodoInProjectForm.style.display = "none";
       darkOverlay.classList.remove("dark-overlay6");
     }
+    
   };
 
   addTodoInProjectForm.addEventListener("submit", saveTodoInProject);
@@ -127,13 +130,17 @@ function addProjectName() {
     // if(project.projectTodos.length == "") {
       //   console.log("hii")
       // }
-    if ((project.projectTodos == "")){ 
-      project.projectTodos = []
-      console.log("hiii")
-    }
-    // if (project.projectTodos == ""){
+    // if ((project.projectTodos ===  undefined) && (projects.length === 1)){ 
     //   project.projectTodos = []
+    //   console.log("hiii")
     // }
+    // if (project.projectTodos === undefined){
+    //   project.projectTodos = []
+    //   console.log("byeee")
+    // }else if (project.projectTodos != ""){
+    //   console.log("ayyyyyyyy")
+    // }
+
     
     let resID;
     let footer;
@@ -180,6 +187,7 @@ function addProjectName() {
 }
 function saveProjectsOnSubmit() {
   addProjectForm.addEventListener("submit", function (ev) {
+    
     ev.preventDefault();
     const addProjectTitle = document.getElementById("add-project-title").value;
     const project = new Project(addProjectTitle);

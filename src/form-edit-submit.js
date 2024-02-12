@@ -9,6 +9,13 @@ const content = document.getElementById("content");
 const currentDate = new Date();
 function editTodos(todoID) {
   const todoToEdit = todos.find((todo) => todo.todoID === todoID);
+  const indexWeeks = todosWeeks.findIndex(function (value) {
+    return value.noteID === todoToEdit.noteID;
+  });
+  const indexToday = todosToday.findIndex(function (value) {
+    return value.noteID === todoToEdit.noteID;
+  });
+
   editTodoForm.addEventListener("submit", function saveEdit(ev) {
     ev.preventDefault();
     const titleEditValue = document.getElementById("title-edit").value;
@@ -37,11 +44,17 @@ function editTodos(todoID) {
     if(((differenceInDays(todoToEdit.dueDate, currentDate)) < 7) && ((differenceInDays(todoToEdit.dueDate, currentDate)) >= 0)){
       console.log(differenceInDays(todoToEdit.dueDate, currentDate))
       todosWeeks.push(todoToEdit)
+    } else {
+      todosWeeks.splice(indexWeeks,1)
+
     }
     if (((differenceInHours(todoToEdit.dueDate, currentDate) >= 0) && (differenceInHours(todoToEdit.dueDate, currentDate) <= 24))||((differenceInHours(todoToEdit.dueDate, currentDate) <= 0) && (differenceInHours(todoToEdit.dueDate, currentDate) >= -24))){
       console.log(differenceInHours(todoToEdit.dueDate, currentDate));
       todosToday.push(todoToEdit);   
+    }else {
+      todosToday.splice(indexToday, 1)
     }
+  
 
     editTodoForm.style.display = "none";
     darkOverlay.classList.remove("dark-overlay2");
