@@ -181,6 +181,7 @@ function addProjectName() {
       }
 
       saveTodoInProject = saveTodosOnProjectFormSubmit(resID, project);
+      console.log(clickedObj)
     });
     projectsList.appendChild(newList);
   });

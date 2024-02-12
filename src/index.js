@@ -106,6 +106,7 @@ homeButton.addEventListener("click", function (ev) {
   clickedObj.notesClicked = false;
   content.innerHTML = "";
   renderDOM();
+  console.log(clickedObj);
 });
 todayButton.addEventListener("click", function (ev) {
   clickedObj.homeClicked = true;
@@ -116,6 +117,7 @@ todayButton.addEventListener("click", function (ev) {
   clickedObj.notesClicked = false;
   content.innerHTML = "";
   renderTodayTodos();
+  console.log(clickedObj);
 });
 weekButton.addEventListener("click", function (ev) {
   clickedObj.homeClicked = true;
@@ -126,6 +128,7 @@ weekButton.addEventListener("click", function (ev) {
   clickedObj.notesClicked = false;
   content.innerHTML = "";
   renderWeeksTodos();
+  console.log(clickedObj);
 });
 projectsButton.addEventListener("click", function (ev) {
   clickedObj.homeClicked = false;
@@ -136,6 +139,7 @@ projectsButton.addEventListener("click", function (ev) {
   clickedObj.notesClicked = false;
   content.innerHTML = "";
   addProject();
+  console.log(clickedObj);
 });
 
 notesButton.addEventListener("click", function () {
@@ -147,6 +151,7 @@ notesButton.addEventListener("click", function () {
   clickedObj.notesClicked = true;
   content.innerHTML = "";
   addNote();
+  console.log(clickedObj);
 });
 
 export { clickedObj };

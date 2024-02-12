@@ -1,5 +1,5 @@
-import { todos } from "./storetodos.js";
-import { renderDOM } from "./renderDOM.js";
+import { todos, todosToday, todosWeeks } from "./storetodos.js";
+import { renderDOM, renderTodayTodos, renderWeeksTodos } from "./renderDOM.js";
 import { projects } from "./add-projects.js";
 import { clickedObj } from "./index.js";
 import { renderProjectTodo } from "./renderDOM.js";
@@ -8,6 +8,12 @@ function deleteTodo(todoID) {
   const index = todos.findIndex(function (value) {
     return value.todoID === todoID;
   });
+  if (todosToday.includes(todoToEdit)) {
+    todosToday.splice(index, 1);
+  }
+  if (todosWeeks.includes(todoToEdit)) {
+    todosWeeks.splice(index, 1);
+  }
   if (projects !== "" && clickedObj.thisProjectClicked) {
     for (let i = 0; i < projects.length; i++) {
       const project = projects[i];
@@ -31,6 +37,7 @@ function deleteTodo(todoID) {
     renderDOM();
     return;
   }
+
   renderDOM();
 }
 export { deleteTodo };
