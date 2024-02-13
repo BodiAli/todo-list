@@ -10,7 +10,6 @@ function noteDeleteButton() {
           return value.noteID === element.noteID;
         });
         notes.splice(index, 1);
-        console.log(notes);
         addNote();
       }
     }

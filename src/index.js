@@ -106,7 +106,15 @@ homeButton.addEventListener("click", function (ev) {
   clickedObj.notesClicked = false;
   content.innerHTML = "";
   renderDOM();
-  console.log(clickedObj);
+  homeButton.classList.add("clicked");
+  todayButton.classList.remove("clicked");
+  weekButton.classList.remove("clicked");
+  projectsButton.classList.remove("clicked");
+  notesButton.classList.remove("clicked");
+  const allListItems = document.querySelectorAll(".project-lists");
+  allListItems.forEach(function (item) {
+    item.classList.remove("clicked2");
+  });
 });
 todayButton.addEventListener("click", function (ev) {
   clickedObj.homeClicked = true;
@@ -117,7 +125,15 @@ todayButton.addEventListener("click", function (ev) {
   clickedObj.notesClicked = false;
   content.innerHTML = "";
   renderTodayTodos();
-  console.log(clickedObj);
+  homeButton.classList.remove("clicked");
+  todayButton.classList.add("clicked");
+  weekButton.classList.remove("clicked");
+  projectsButton.classList.remove("clicked");
+  notesButton.classList.remove("clicked");
+  const allListItems = document.querySelectorAll(".project-lists");
+  allListItems.forEach(function (item) {
+    item.classList.remove("clicked2");
+  });
 });
 weekButton.addEventListener("click", function (ev) {
   clickedObj.homeClicked = true;
@@ -128,7 +144,15 @@ weekButton.addEventListener("click", function (ev) {
   clickedObj.notesClicked = false;
   content.innerHTML = "";
   renderWeeksTodos();
-  console.log(clickedObj);
+  homeButton.classList.remove("clicked");
+  todayButton.classList.remove("clicked");
+  weekButton.classList.add("clicked");
+  projectsButton.classList.remove("clicked");
+  notesButton.classList.remove("clicked");
+  const allListItems = document.querySelectorAll(".project-lists");
+  allListItems.forEach(function (item) {
+    item.classList.remove("clicked2");
+  });
 });
 projectsButton.addEventListener("click", function (ev) {
   clickedObj.homeClicked = false;
@@ -139,7 +163,15 @@ projectsButton.addEventListener("click", function (ev) {
   clickedObj.notesClicked = false;
   content.innerHTML = "";
   addProject();
-  console.log(clickedObj);
+  homeButton.classList.remove("clicked");
+  todayButton.classList.remove("clicked");
+  weekButton.classList.remove("clicked");
+  projectsButton.classList.add("clicked");
+  notesButton.classList.remove("clicked");
+  const allListItems = document.querySelectorAll(".project-lists");
+  allListItems.forEach(function (item) {
+    item.classList.remove("clicked2");
+  });
 });
 
 notesButton.addEventListener("click", function () {
@@ -151,7 +183,15 @@ notesButton.addEventListener("click", function () {
   clickedObj.notesClicked = true;
   content.innerHTML = "";
   addNote();
-  console.log(clickedObj);
+  homeButton.classList.remove("clicked");
+  todayButton.classList.remove("clicked");
+  weekButton.classList.remove("clicked");
+  projectsButton.classList.remove("clicked");
+  notesButton.classList.add("clicked");
+  const allListItems = document.querySelectorAll(".project-lists");
+  allListItems.forEach(function (item) {
+    item.classList.remove("clicked2");
+  });
 });
 
 export { clickedObj };

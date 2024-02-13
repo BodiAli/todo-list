@@ -12,8 +12,14 @@ const addTodoInProjectForm = document.getElementById("add-todo-in-project");
 const lowPriorityButtonProject = document.getElementById("low-in-project");
 const midPriorityButtonProject = document.getElementById("mid-in-project");
 const highPriorityButtonProject = document.getElementById("high-in-project");
+const homeButton = document.getElementById("home-button");
+const todayButton = document.getElementById("today-button");
+const weekButton = document.getElementById("week-button");
+const projectsButton = document.getElementById("projects-button");
+const notesButton = document.getElementById("notes-button");
 const currentDate = new Date();
 const projects = [];
+
 class Project {
   constructor(title) {
     (this.title = title), (this.projectTodos = []), (this.projectID = projects.length + 1);
@@ -23,7 +29,8 @@ class Project {
 function addProject() {
   content.innerHTML = "";
   const projectResultRow = document.createElement("div");
-  const projectResult = document.createElement("div");
+  const projectResult = document.createElement("div"); 
+   
   const projectResultText = document.createElement("div");
   const myH3 = document.createElement("h3");
   const myDeleteProjectButton = document.createElement("button");
@@ -53,6 +60,7 @@ function addProject() {
   projectResultText.classList.add("align-items-center");
   projectResultText.classList.add("w-100");
   projectResultText.classList.add("h-100");
+  projectResultText.classList.add("project-click");
 
   myH3.classList.add("mb-0");
   myH3.classList.add("project-title");
@@ -65,10 +73,52 @@ function addProject() {
     const element = projects[i];
     const newProjectResult = projectResult.cloneNode(true);
     const newDivProjectTitle = newProjectResult.querySelector(".project-title");
+    const newDivProjectResultText = newProjectResult.querySelector(".project-click");
     newProjectResult.style.backgroundImage = `url(${background})`;
     const newCloseProjectButton = newProjectResult.querySelector(".delete-project");
     newCloseProjectButton.projectID = element.projectID;
+    newDivProjectResultText.projectID = element.projectID
     newDivProjectTitle.textContent = element.title;
+    let resID;
+    let footer
+    newDivProjectResultText.addEventListener("click", function listClick(ev){
+      clickedObj.homeClicked = false;
+      clickedObj.todayClicked = false;
+      clickedObj.weekClicked = false;
+      clickedObj.projectsClicked = false;
+      clickedObj.thisProjectClicked = true;
+      clickedObj.notesClicked = false;
+      
+      footer = addTodoInProjectForm.querySelector("#add-todo-in-project-footer");
+      const allListItems = document.querySelectorAll(".project-lists");
+      footer.textContent = `Add Todo In ${newDivProjectTitle.textContent}`;
+
+      allListItems.forEach((item) => {
+        if (item.projectID === ev.target.projectID) {
+          item.classList.add("clicked2");
+        } else {
+          item.classList.remove("clicked2");
+        }
+      });
+
+      // content.innerHTML = "";
+      resID = ev.target.projectID;
+      console.log(resID)
+      
+      if (ev.target.projectID === element.projectID) {
+        if (element.projectTodos !== undefined) {
+          renderProjectTodo(element.projectTodos);
+          
+        }
+      }
+      if (saveTodoInProject !== null) {
+        addTodoInProjectForm.removeEventListener("submit", saveTodoInProject);
+      }
+
+      saveTodoInProject = saveTodosOnProjectFormSubmit(resID, element);
+      console.log(clickedObj)
+
+    })
     projectResultRow.appendChild(newProjectResult);
   }
 }
@@ -147,13 +197,17 @@ function addProjectName() {
       clickedObj.notesClicked = false;
 
       footer = addTodoInProjectForm.querySelector("#add-todo-in-project-footer");
-      footer.textContent = newList.textContent;
+      footer.textContent = `Add Todo In ${newList.textContent}`;
       const allListItems = document.querySelectorAll(".project-lists");
       allListItems.forEach((item) => {
-        item.style.border = "none";
+        item.classList.remove("clicked2");
       });
-      newList.style.border = "2px solid black";
-
+      newList.classList.add("clicked2");
+      homeButton.classList.remove("clicked");
+      todayButton.classList.remove("clicked");
+      weekButton.classList.remove("clicked");
+      notesButton.classList.remove("clicked");
+    
       content.innerHTML = "";
       resID = ev.target.projectID;
       if (ev.target.projectID === project.projectID) {

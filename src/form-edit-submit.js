@@ -43,14 +43,20 @@ function editTodos(todoID) {
     }
     if(((differenceInDays(todoToEdit.dueDate, currentDate)) < 7) && ((differenceInDays(todoToEdit.dueDate, currentDate)) >= 0)){
       console.log(differenceInDays(todoToEdit.dueDate, currentDate))
-      todosWeeks.push(todoToEdit)
+      if(todosWeeks.find((todo)=> todo === todoToEdit) === undefined){
+
+        todosWeeks.push(todoToEdit)
+      }
     } else {
       todosWeeks.splice(indexWeeks,1)
 
     }
     if (((differenceInHours(todoToEdit.dueDate, currentDate) >= 0) && (differenceInHours(todoToEdit.dueDate, currentDate) <= 24))||((differenceInHours(todoToEdit.dueDate, currentDate) <= 0) && (differenceInHours(todoToEdit.dueDate, currentDate) >= -24))){
       console.log(differenceInHours(todoToEdit.dueDate, currentDate));
-      todosToday.push(todoToEdit);   
+      if(todosToday.find((todo)=> todo === todoToEdit) === undefined){
+
+        todosToday.push(todoToEdit)
+      }
     }else {
       todosToday.splice(indexToday, 1)
     }
