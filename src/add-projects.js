@@ -122,26 +122,12 @@ function saveTodosOnProjectFormSubmit(resID, project) {
   return saveTodoInProject;
 }
 
+let saveTodoInProject = null;
 function addProjectName() {
   projectsList.innerHTML = "";
-  let saveTodoInProject = null;
   console.log(projects)
   projects.forEach(function (project) {
-    // if(project.projectTodos.length == "") {
-      //   console.log("hii")
-      // }
-    // if ((project.projectTodos ===  undefined) && (projects.length === 1)){ 
-    //   project.projectTodos = []
-    //   console.log("hiii")
-    // }
-    // if (project.projectTodos === undefined){
-    //   project.projectTodos = []
-    //   console.log("byeee")
-    // }else if (project.projectTodos != ""){
-    //   console.log("ayyyyyyyy")
-    // }
 
-    
     let resID;
     let footer;
     const newList = document.createElement("li");

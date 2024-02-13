@@ -9,16 +9,26 @@ function deleteTodo(todoID) {
     return value.todoID === todoID;
   });
   if (todosToday.includes(todoToEdit)) {
-    todosToday.splice(index, 1);
+    const indexRes = todosToday.findIndex(function (todo) {
+      return todo === todoToEdit;
+    });
+    todosToday.splice(indexRes, 1);
   }
   if (todosWeeks.includes(todoToEdit)) {
-    todosWeeks.splice(index, 1);
+    const indexRes = todosWeeks.findIndex(function (todo) {
+      return todo === todoToEdit;
+    });
+    todosWeeks.splice(indexRes, 1);
   }
   if (projects !== "" && clickedObj.thisProjectClicked) {
     for (let i = 0; i < projects.length; i++) {
       const project = projects[i];
       if (project.projectTodos.includes(todoToEdit)) {
-        project.projectTodos.splice(index, 1);
+        const indexRes = project.projectTodos.findIndex(function (todo) {
+          return todo === todoToEdit;
+        });
+
+        project.projectTodos.splice(indexRes, 1);
         renderProjectTodo(project.projectTodos);
       }
     }
@@ -28,8 +38,11 @@ function deleteTodo(todoID) {
     for (let i = 0; i < projects.length; i++) {
       const project = projects[i];
       if (project.projectTodos.includes(todoToEdit)) {
+        const indexRes = project.projectTodos.findIndex(function (todo) {
+          return todo === todoToEdit;
+        });
         console.log("hiiiiiii");
-        project.projectTodos.splice(index, 1);
+        project.projectTodos.splice(indexRes, 1);
         renderProjectTodo(project.projectTodos);
       }
     }

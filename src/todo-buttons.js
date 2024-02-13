@@ -37,6 +37,7 @@ function todoDeleteButton() {
   content.addEventListener("click", function (ev) {
     for (let i = 0; i < todos.length; i++) {
       const element = todos[i];
+      console.log(ev.target.todoID, element.todoID);
       if (ev.target.todoID === element.todoID && ev.target.classList.contains("delete")) {
         const resID = ev.target.todoID;
         deleteTodo(resID);
