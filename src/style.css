@@ -38,6 +38,7 @@ header {
   box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
   border: 5px ridge black;
   font-family: "MyFont";
+  user-select: none;
 }
 header > h1 {
   color: #e36300;
@@ -280,7 +281,7 @@ header > img {
   color: gray;
   position: absolute;
   left: -10px;
-  animation: slideIn 0.5s forwards;
+  animation: fadeIn 0.5s forwards;
 }
 
 .clicked2 {
@@ -292,18 +293,26 @@ header > img {
   color: #e36300;
   position: absolute;
   left: -10px;
-  animation: slideIn 0.5s forwards;
+  animation: fadeIn 0.5s forwards;
+}
+.start {
+  position: relative;
+  animation: slideIn 0.7s forwards;
 }
 
-@keyframes slideIn {
+@keyframes fadeIn {
   from {
-    opacity: 0; /* Start with 0 opacity */
+    opacity: 0;
   }
   to {
-    opacity: 1; /* End with full opacity */
+    opacity: 1;
   }
 }
-/* .custom-shadow2 {
-  box-shadow: 0 0 5px rgb(0, 0, 0);
-  transition: box-shadow 0.3s;
-} */
+@keyframes slideIn {
+  from {
+    left: -100%;
+  }
+  to {
+    left: 0;
+  }
+}

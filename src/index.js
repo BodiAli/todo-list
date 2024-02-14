@@ -24,6 +24,23 @@ const content = document.getElementById("content");
 const addNoteForm = document.getElementById("add-note");
 const addProjectForm = document.getElementById("add-project");
 const addTodoInProject = document.getElementById("add-todo-in-project");
+const todoTitleValue = document.getElementById("title");
+const todoDetail = document.getElementById("textarea");
+const todoDateValue = document.getElementById("date");
+const lowPriorityButton = document.getElementById("low");
+const midPriorityButton = document.getElementById("mid");
+const highPriorityButton = document.getElementById("high");
+const todoTitleInProjectValue = document.getElementById("title-in-project");
+const todoDetailsInProjectValue = document.getElementById("textarea-in-project");
+const todoDateInProjectValue = document.getElementById("date-in-project");
+const lowPriorityButtonProject = document.getElementById("low-in-project");
+const midPriorityButtonProject = document.getElementById("mid-in-project");
+const highPriorityButtonProject = document.getElementById("high-in-project");
+const addProjectTitle = document.getElementById("add-project-title");
+
+const addNoteTitle = document.getElementById("add-note-title");
+const addNoteDetails = document.getElementById("textarea-note");
+
 const clickedObj = {
   homeClicked: false,
   todayClicked: false,
@@ -83,15 +100,30 @@ document.addEventListener("click", (ev) => {
 });
 function showForm(ev) {
   if (!clickedObj.projectsClicked && !clickedObj.notesClicked && !clickedObj.thisProjectClicked) {
+    todoTitleValue.value = "";
+    todoDetail.value = "";
+    todoDateValue.value = "";
+    lowPriorityButton.style.outline = "none";
+    midPriorityButton.style.outline = "none";
+    highPriorityButton.style.outline = "none";
     addForm.style.display = "block";
     darkOverlay.classList.add("dark-overlay");
   } else if (clickedObj.notesClicked) {
+    addNoteTitle.value = "";
+    addNoteDetails.value = "";
     addNoteForm.style.display = "block";
     darkOverlay.classList.add("dark-overlay4");
   } else if (clickedObj.projectsClicked) {
+    addProjectTitle.value = "";
     addProjectForm.style.display = "block";
     darkOverlay.classList.add("dark-overlay5");
   } else if (clickedObj.thisProjectClicked) {
+    todoTitleInProjectValue.value = "";
+    todoDetailsInProjectValue.value = "";
+    todoDateInProjectValue.value = "";
+    lowPriorityButtonProject.style.outline = "none";
+    midPriorityButtonProject.style.outline = "none";
+    highPriorityButtonProject.style.outline = "none";
     addTodoInProject.style.display = "block";
     darkOverlay.classList.add("dark-overlay6");
   }

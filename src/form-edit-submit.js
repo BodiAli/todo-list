@@ -34,11 +34,11 @@ function editTodos(todoID) {
       todoToEdit.dueDate = dueDateEditValue;
     }
 
-    if (lowPriorityEditButton.style.border.includes("solid")) {
+    if (lowPriorityEditButton.style.outline.includes("solid")) {
       todoToEdit.priority = "low";
-    } else if (midPriorityEditButton.style.border.includes("solid")) {
+    } else if (midPriorityEditButton.style.outline.includes("solid")) {
       todoToEdit.priority = "mid";
-    } else if (highPriorityEditButton.style.border.includes("solid")) {
+    } else if (highPriorityEditButton.style.outline.includes("solid")) {
       todoToEdit.priority = "high";
     }
     if(((differenceInDays(todoToEdit.dueDate, currentDate)) < 7) && ((differenceInDays(todoToEdit.dueDate, currentDate)) >= 0)){

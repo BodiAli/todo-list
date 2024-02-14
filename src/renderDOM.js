@@ -3,20 +3,25 @@ import { clickedObj } from "./index.js";
 import { projects } from "./add-projects.js";
 const content = document.getElementById("content");
 const todoRow = document.getElementById("todo-row");
+const localTodos = JSON.parse(localStorage.getItem("todos"));
 function renderDOM() {
   content.innerHTML = "";
-  for (let i = 0; i < todos.length; i++) {
-    const element = todos[i];
+  for (let i = 0; i < localTodos.length; i++) {
+    const element = localTodos[i];
 
     const myTodoRow = todoRow.cloneNode(true);
     const todoTitle = myTodoRow.querySelector("#todo-title");
     const todoDate = myTodoRow.querySelector("#todo-date");
     const todoDetailsButton = myTodoRow.querySelector(".details");
     const todoEditButton = myTodoRow.querySelector(".edit");
+    const todoEditIconButton = myTodoRow.querySelector(".bi-pencil-fill");
+    const todoDeleteIconButton = myTodoRow.querySelector(".bi-trash3-fill");
     const todoDeleteButton = myTodoRow.querySelector(".delete");
     todoDetailsButton.todoID = element.todoID;
     todoDeleteButton.todoID = element.todoID;
     todoEditButton.todoID = element.todoID;
+    todoEditIconButton.todoID = element.todoID;
+    todoDeleteIconButton.todoID = element.todoID;
     todoTitle.textContent = element.title;
     todoDate.textContent = element.dueDate;
     if (element.priority === "low") {
@@ -46,10 +51,14 @@ function renderTodayTodos() {
     const todoDate = myTodoRow.querySelector("#todo-date");
     const todoDetailsButton = myTodoRow.querySelector(".details");
     const todoEditButton = myTodoRow.querySelector(".edit");
+    const todoEditIconButton = myTodoRow.querySelector(".bi-pencil-fill");
+    const todoDeleteIconButton = myTodoRow.querySelector(".bi-trash3-fill");
     const todoDeleteButton = myTodoRow.querySelector(".delete");
     todoDetailsButton.todoID = element.todoID;
     todoDeleteButton.todoID = element.todoID;
     todoEditButton.todoID = element.todoID;
+    todoEditIconButton.todoID = element.todoID;
+    todoDeleteIconButton.todoID = element.todoID;
     todoTitle.textContent = element.title;
     todoDate.textContent = element.dueDate;
     if (element.priority === "low") {
@@ -79,10 +88,15 @@ function renderWeeksTodos() {
     const todoDate = myTodoRow.querySelector("#todo-date");
     const todoDetailsButton = myTodoRow.querySelector(".details");
     const todoEditButton = myTodoRow.querySelector(".edit");
+    const todoEditIconButton = myTodoRow.querySelector(".bi-pencil-fill");
+    const todoDeleteIconButton = myTodoRow.querySelector(".bi-trash3-fill");
     const todoDeleteButton = myTodoRow.querySelector(".delete");
     todoDetailsButton.todoID = element.todoID;
     todoDeleteButton.todoID = element.todoID;
     todoEditButton.todoID = element.todoID;
+    todoEditIconButton.todoID = element.todoID;
+    todoDeleteIconButton.todoID = element.todoID;
+
     todoTitle.textContent = element.title;
     todoDate.textContent = element.dueDate;
     if (element.priority === "low") {
@@ -113,10 +127,14 @@ function renderProjectTodo(array) {
     const todoDate = myTodoRow.querySelector("#todo-date");
     const todoDetailsButton = myTodoRow.querySelector(".details");
     const todoEditButton = myTodoRow.querySelector(".edit");
+    const todoEditIconButton = myTodoRow.querySelector(".bi-pencil-fill");
+    const todoDeleteIconButton = myTodoRow.querySelector(".bi-trash3-fill");
     const todoDeleteButton = myTodoRow.querySelector(".delete");
     todoDetailsButton.todoID = project.todoID;
     todoDeleteButton.todoID = project.todoID;
     todoEditButton.todoID = project.todoID;
+    todoEditIconButton.todoID = project.todoID;
+    todoDeleteIconButton.todoID = project.todoID;
     todoTitle.textContent = project.title;
     todoDate.textContent = project.dueDate;
     if (project.priority === "low") {

@@ -12,17 +12,17 @@ export default function getFormData() {
     if (ev.target.type !== "date" && ev.target.getAttribute("id") !== "submit-form") {
       ev.preventDefault();
       if (ev.target.getAttribute("id") === "low") {
-        lowPriorityButton.style.border = "2px solid black";
-        midPriorityButton.style.border = "none";
-        highPriorityButton.style.border = "none";
+        lowPriorityButton.style.outline = "2px solid black";
+        midPriorityButton.style.outline = "none";
+        highPriorityButton.style.outline = "none";
       } else if (ev.target.getAttribute("id") === "mid") {
-        midPriorityButton.style.border = "2px solid black";
-        lowPriorityButton.style.border = "none";
-        highPriorityButton.style.border = "none";
+        midPriorityButton.style.outline = "2px solid black";
+        lowPriorityButton.style.outline = "none";
+        highPriorityButton.style.outline = "none";
       } else if (ev.target.getAttribute("id") === "high") {
-        highPriorityButton.style.border = "2px solid black";
-        lowPriorityButton.style.border = "none";
-        midPriorityButton.style.border = "none";
+        highPriorityButton.style.outline = "2px solid black";
+        lowPriorityButton.style.outline = "none";
+        midPriorityButton.style.outline = "none";
       }
     }
   });
@@ -30,17 +30,17 @@ export default function getFormData() {
     if (ev.target.type !== "date" && ev.target.getAttribute("id") !== "submit-form-in-project") {
       ev.preventDefault();
       if (ev.target.getAttribute("id") === "low-in-project") {
-        lowPriorityButtonProject.style.border = "2px solid black";
-        midPriorityButtonProject.style.border = "none";
-        highPriorityButtonProject.style.border = "none";
+        lowPriorityButtonProject.style.outline = "2px solid black";
+        midPriorityButtonProject.style.outline = "none";
+        highPriorityButtonProject.style.outline = "none";
       } else if (ev.target.getAttribute("id") === "mid-in-project") {
-        midPriorityButtonProject.style.border = "2px solid black";
-        lowPriorityButtonProject.style.border = "none";
-        highPriorityButtonProject.style.border = "none";
+        midPriorityButtonProject.style.outline = "2px solid black";
+        lowPriorityButtonProject.style.outline = "none";
+        highPriorityButtonProject.style.outline = "none";
       } else if (ev.target.getAttribute("id") === "high-in-project") {
-        highPriorityButtonProject.style.border = "2px solid black";
-        lowPriorityButtonProject.style.border = "none";
-        midPriorityButtonProject.style.border = "none";
+        highPriorityButtonProject.style.outline = "2px solid black";
+        lowPriorityButtonProject.style.outline = "none";
+        midPriorityButtonProject.style.outline = "none";
       }
     }
   });

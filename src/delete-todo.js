@@ -41,7 +41,6 @@ function deleteTodo(todoID) {
         const indexRes = project.projectTodos.findIndex(function (todo) {
           return todo === todoToEdit;
         });
-        console.log("hiiiiiii");
         project.projectTodos.splice(indexRes, 1);
         renderProjectTodo(project.projectTodos);
       }

@@ -26,15 +26,16 @@ function saveTodosOnSubmit() {
 
   function saveTodos(ev) {
     ev.preventDefault();
+
     const todoTitleValue = document.getElementById("title").value;
     const todoDetailsValue = document.getElementById("textarea").value;
     const todoDateValue = document.getElementById("date").value;
     let priority;
-    if (lowPriorityButton.style.border.includes("solid")) {
+    if (lowPriorityButton.style.outline.includes("solid")) {
       priority = "low";
-    } else if (midPriorityButton.style.border.includes("solid")) {
+    } else if (midPriorityButton.style.outline.includes("solid")) {
       priority = "mid";
-    } else if (highPriorityButton.style.border.includes("solid")) {
+    } else if (highPriorityButton.style.outline.includes("solid")) {
       priority = "high";
     }
     const todo = new Todos(todoTitleValue, todoDetailsValue, todoDateValue, priority);
@@ -49,7 +50,10 @@ function saveTodosOnSubmit() {
       todosToday.push(todo);   
     }
 
-    
+    localStorage.todos = JSON.stringify(todos)
+    localStorage.todosWeeks = JSON.stringify(todos)
+    localStorage.todosToday = JSON.stringify(todos)
+
     renderDOM();
     addTodoForm.style.display = "none";
     darkOverlay.classList.remove("dark-overlay");

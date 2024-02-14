@@ -5,8 +5,14 @@ const content = document.getElementById("content");
 const editTodoForm = document.getElementById("edit-todo");
 const darkOverlay = document.getElementById("dark-overlay");
 const displayTodoDetailsModal = document.getElementById("display-details");
+const lowPriorityButtonEdit = document.getElementById("low-edit");
+const midPriorityButtonEdit = document.getElementById("mid-edit");
+const highPriorityButtonEdit = document.getElementById("high-edit");
+const titleEditValue = document.getElementById("title-edit");
+const descriptionEditValue = document.getElementById("textarea-edit");
+const dueDateEditValue = document.getElementById("date-edit");
+
 function todoCheckedButton() {
-  const inputClicked = false;
   content.addEventListener("click", function (ev) {
     if (ev.target.tagName === "INPUT" && ev.target.checked) {
       ev.target.parentElement.parentElement.parentElement.querySelector("#details").classList.add("disabled");
@@ -37,7 +43,10 @@ function todoDeleteButton() {
   content.addEventListener("click", function (ev) {
     for (let i = 0; i < todos.length; i++) {
       const element = todos[i];
-      if (ev.target.todoID === element.todoID && ev.target.classList.contains("delete")) {
+      if (
+        ev.target.todoID === element.todoID &&
+        (ev.target.classList.contains("delete") || ev.target.classList.contains("bi-trash3-fill"))
+      ) {
         const resID = ev.target.todoID;
         deleteTodo(resID);
       }
@@ -48,8 +57,17 @@ function todoEditButton() {
   content.addEventListener("click", function (ev) {
     for (let i = 0; i < todos.length; i++) {
       const element = todos[i];
-      if (ev.target.todoID === element.todoID && ev.target.classList.contains("edit")) {
+      if (
+        ev.target.todoID === element.todoID &&
+        (ev.target.classList.contains("edit") || ev.target.classList.contains("bi-pencil-fill"))
+      ) {
         const resID = ev.target.todoID;
+        titleEditValue.value = "";
+        descriptionEditValue.value = "";
+        dueDateEditValue.value = "";
+        lowPriorityButtonEdit.style.outline = "none";
+        midPriorityButtonEdit.style.outline = "none";
+        highPriorityButtonEdit.style.outline = "none";
         editTodoForm.style.display = "block";
         darkOverlay.classList.add("dark-overlay2");
         editTodos(resID);

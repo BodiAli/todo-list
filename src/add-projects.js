@@ -101,7 +101,6 @@ function addProject() {
         }
       });
 
-      // content.innerHTML = "";
       resID = ev.target.projectID;
       console.log(resID)
       
@@ -131,11 +130,11 @@ function saveTodosOnProjectFormSubmit(resID, project) {
     const todoDetailsInProjectValue = document.getElementById("textarea-in-project").value;
     const todoDateInProjectValue = document.getElementById("date-in-project").value;
     let priority;
-    if (lowPriorityButtonProject.style.border.includes("solid")) {
+    if (lowPriorityButtonProject.style.outline.includes("solid")) {
       priority = "low";
-    } else if (midPriorityButtonProject.style.border.includes("solid")) {
+    } else if (midPriorityButtonProject.style.outline.includes("solid")) {
       priority = "mid";
-    } else if (highPriorityButtonProject.style.border.includes("solid")) {
+    } else if (highPriorityButtonProject.style.outline.includes("solid")) {
       priority = "high";
     }
     if (resID !== project.projectID) {
