@@ -8,7 +8,7 @@ import { saveTodosOnSubmit } from "./storetodos.js";
 import { renderDOM, renderTodayTodos, renderWeeksTodos } from "./renderDOM.js";
 import { saveNotesOnSubmit, addNote } from "./add-note.js";
 import { noteDeleteButton } from "./delete-note.js";
-import { addProject, saveProjectsOnSubmit, projects } from "./add-projects.js";
+import { addProject, saveProjectsOnSubmit, projects, addProjectName } from "./add-projects.js";
 import { projectDeleteButton } from "./delete-project.js";
 const addTodoButton = document.getElementById("add");
 const addForm = document.getElementById("add-todo");
@@ -227,3 +227,5 @@ notesButton.addEventListener("click", function () {
 });
 
 export { clickedObj };
+// localStorage.clear();
+document.addEventListener("DOMContentLoaded", addProjectName);

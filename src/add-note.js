@@ -2,6 +2,8 @@ const addNoteForm = document.getElementById("add-note");
 const content = document.getElementById("content");
 const darkOverlay = document.getElementById("dark-overlay");
 const notes = [];
+const localNotes = JSON.parse(localStorage.getItem("localNotes")) || [];
+
 class Note {
   constructor(title, details, noteID) {
     (this.title = title), (this.details = details), (this.noteID = notes.length + 1);
@@ -76,8 +78,8 @@ function addNote() {
 
   content.appendChild(noteResultRow);
 
-  for (let i = 0; i < notes.length; i++) {
-    const element = notes[i];
+  for (let i = 0; i < localNotes.length; i++) {
+    const element = localNotes[i];
     const newNoteResult = noteResult.cloneNode(true);
     const newDivNote = newNoteResult.querySelector(".note-title");
     const newDivParagraph = newNoteResult.querySelector(".note-paragraph");
@@ -107,9 +109,11 @@ function saveNotesOnSubmit() {
     const addNoteDetails = document.getElementById("textarea-note").value;
     const note = new Note(addNoteTitle, addNoteDetails);
     notes.push(note);
+    localNotes.push(note);
+    localStorage.setItem("localNotes", JSON.stringify(localNotes));
     addNoteForm.style.display = "none";
     darkOverlay.classList.remove("dark-overlay4");
     addNote();
   });
 }
-export { saveNotesOnSubmit, notes, addNote };
+export { saveNotesOnSubmit, notes, addNote, localNotes };

@@ -1,9 +1,16 @@
-import { todos, todosToday, todosWeeks, todosProject } from "./storetodos.js";
+import {
+  todos,
+  todosToday,
+  todosWeeks,
+  todosProject,
+  localTodos,
+  localTodosToday,
+  localTodosWeeks,
+} from "./storetodos.js";
 import { clickedObj } from "./index.js";
 import { projects } from "./add-projects.js";
 const content = document.getElementById("content");
 const todoRow = document.getElementById("todo-row");
-const localTodos = JSON.parse(localStorage.getItem("todos"));
 function renderDOM() {
   content.innerHTML = "";
   for (let i = 0; i < localTodos.length; i++) {
@@ -44,8 +51,8 @@ function renderDOM() {
   }
 }
 function renderTodayTodos() {
-  for (let i = 0; i < todosToday.length; i++) {
-    const element = todosToday[i];
+  for (let i = 0; i < localTodosToday.length; i++) {
+    const element = localTodosToday[i];
     const myTodoRow = todoRow.cloneNode(true);
     const todoTitle = myTodoRow.querySelector("#todo-title");
     const todoDate = myTodoRow.querySelector("#todo-date");
@@ -81,8 +88,8 @@ function renderTodayTodos() {
   }
 }
 function renderWeeksTodos() {
-  for (let i = 0; i < todosWeeks.length; i++) {
-    const element = todosWeeks[i];
+  for (let i = 0; i < localTodosWeeks.length; i++) {
+    const element = localTodosWeeks[i];
     const myTodoRow = todoRow.cloneNode(true);
     const todoTitle = myTodoRow.querySelector("#todo-title");
     const todoDate = myTodoRow.querySelector("#todo-date");
@@ -119,6 +126,7 @@ function renderWeeksTodos() {
   }
 }
 function renderProjectTodo(array) {
+  // debugger;
   content.innerHTML = "";
   for (let i = 0; i < array.length; i++) {
     const project = array[i];

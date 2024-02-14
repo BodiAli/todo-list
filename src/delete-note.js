@@ -1,15 +1,17 @@
-import { notes, addNote } from "./add-note.js";
+import { notes, addNote, localNotes } from "./add-note.js";
 const content = document.getElementById("content");
 function noteDeleteButton() {
   content.addEventListener("click", function (ev) {
-    for (let i = 0; i < notes.length; i++) {
-      const element = notes[i];
+    for (let i = 0; i < localNotes.length; i++) {
+      const element = localNotes[i];
       if (ev.target.noteID === element.noteID && ev.target.classList.contains("btn-close")) {
         const resID = ev.target.noteID;
-        const index = notes.findIndex(function (value) {
+        const index = localNotes.findIndex(function (value) {
           return value.noteID === element.noteID;
         });
-        notes.splice(index, 1);
+        localNotes.splice(index, 1);
+        localStorage.setItem("localNotes", JSON.stringify(localNotes));
+
         addNote();
       }
     }

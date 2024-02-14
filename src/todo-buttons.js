@@ -1,4 +1,4 @@
-import { todos } from "./storetodos.js";
+import { todos, localTodos } from "./storetodos.js";
 import { editTodos, saveTodosOnEdit } from "./form-edit-submit.js";
 import { deleteTodo } from "./delete-todo.js";
 const content = document.getElementById("content");
@@ -41,8 +41,8 @@ function todoCheckedButton() {
 }
 function todoDeleteButton() {
   content.addEventListener("click", function (ev) {
-    for (let i = 0; i < todos.length; i++) {
-      const element = todos[i];
+    for (let i = 0; i < localTodos.length; i++) {
+      const element = localTodos[i];
       if (
         ev.target.todoID === element.todoID &&
         (ev.target.classList.contains("delete") || ev.target.classList.contains("bi-trash3-fill"))
@@ -55,8 +55,8 @@ function todoDeleteButton() {
 }
 function todoEditButton() {
   content.addEventListener("click", function (ev) {
-    for (let i = 0; i < todos.length; i++) {
-      const element = todos[i];
+    for (let i = 0; i < localTodos.length; i++) {
+      const element = localTodos[i];
       if (
         ev.target.todoID === element.todoID &&
         (ev.target.classList.contains("edit") || ev.target.classList.contains("bi-pencil-fill"))
@@ -79,8 +79,8 @@ function todoEditButton() {
 
 function todoDetailsButton() {
   content.addEventListener("click", function (ev) {
-    for (let i = 0; i < todos.length; i++) {
-      const element = todos[i];
+    for (let i = 0; i < localTodos.length; i++) {
+      const element = localTodos[i];
       if (ev.target.todoID === element.todoID && ev.target.classList.contains("details")) {
         const displayTodoTitle = displayTodoDetailsModal.querySelector(".display-todo-title");
         const displayTodoDetails = displayTodoDetailsModal.querySelector(".display-todo-details");

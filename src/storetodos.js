@@ -8,15 +8,22 @@ const midPriorityButton = document.getElementById("mid");
 const highPriorityButton = document.getElementById("high");
 const todos = [];
 const todosToday = [];
-const todosWeeks = []
-const todosProject = []
+const todosWeeks = [];
+const todosProject = [];
+
+const localTodos = JSON.parse(localStorage.getItem("localTodos")) || [];
+const localTodosToday = JSON.parse(localStorage.getItem("localTodosToday")) || [];
+const localTodosWeeks = JSON.parse(localStorage.getItem("localTodosWeeks")) || [];
+const localTodosProject = JSON.parse(localStorage.getItem("localTodosProject")) || [];
+
+
 class Todos {
   constructor(title, description, dueDate, priority, id) {
     this.title = title;
     this.description = description;
     this.dueDate = dueDate;
     this.priority = priority;
-    this.todoID = todos.length + 1;
+    this.todoID = localTodos.length + 1;
   }
 }
 
@@ -41,22 +48,28 @@ function saveTodosOnSubmit() {
     const todo = new Todos(todoTitleValue, todoDetailsValue, todoDateValue, priority);
     
     todos.push(todo);
+    localTodos.push(todo);
     if(((differenceInDays(todo.dueDate, currentDate)) < 7) && ((differenceInDays(todo.dueDate, currentDate)) >= 0)){
       console.log(differenceInDays(todo.dueDate, currentDate))
+      localTodosWeeks.push(todo)
       todosWeeks.push(todo)
     }
     if (((differenceInHours(todo.dueDate, currentDate) >= 0) && (differenceInHours(todo.dueDate, currentDate) <= 24))||((differenceInHours(todo.dueDate, currentDate) <= 0) && (differenceInHours(todo.dueDate, currentDate) >= -24))){
       console.log(differenceInHours(todo.dueDate, currentDate));
+      localTodosToday.push(todo)
       todosToday.push(todo);   
     }
+    localStorage.setItem("localTodos", JSON.stringify(localTodos));
+    localStorage.setItem("localTodosWeeks", JSON.stringify(localTodosWeeks));
+    localStorage.setItem("localTodosToday", JSON.stringify(localTodosToday));
 
-    localStorage.todos = JSON.stringify(todos)
-    localStorage.todosWeeks = JSON.stringify(todos)
-    localStorage.todosToday = JSON.stringify(todos)
 
+    // localStorage.todosWeeks = JSON.stringify(todos)
+    // localStorage.todosToday = JSON.stringify(todos)
+    console.log(localTodos)
     renderDOM();
     addTodoForm.style.display = "none";
     darkOverlay.classList.remove("dark-overlay");
   }
 }
-export { saveTodosOnSubmit, todos, todosToday, todosWeeks, todosProject, Todos };
+export { saveTodosOnSubmit, todos, todosToday, todosWeeks, todosProject, Todos,localTodos, localTodosToday,localTodosWeeks };

@@ -1,18 +1,18 @@
-import { todos,todosWeeks,todosToday } from "./storetodos.js";
+import { todos,todosWeeks,todosToday,localTodos,localTodosToday,localTodosWeeks } from "./storetodos.js";
 import { renderDOM, renderProjectTodo } from "./renderDOM.js";
 import { clickedObj } from "./index.js";
-import { addProjectName, projects } from "./add-projects.js";
+import { addProjectName, localProjects } from "./add-projects.js";
 import { differenceInDays, differenceInHours } from "date-fns";
 const editTodoForm = document.getElementById("edit-todo");
 const darkOverlay = document.getElementById("dark-overlay");
 const content = document.getElementById("content");
 const currentDate = new Date();
 function editTodos(todoID) {
-  const todoToEdit = todos.find((todo) => todo.todoID === todoID);
-  const indexWeeks = todosWeeks.findIndex(function (value) {
+  const todoToEdit = localTodos.find((todo) => todo.todoID === todoID);
+  const indexWeeks = localTodosWeeks.findIndex(function (value) {
     return value.noteID === todoToEdit.noteID;
   });
-  const indexToday = todosToday.findIndex(function (value) {
+  const indexToday = localTodosToday.findIndex(function (value) {
     return value.noteID === todoToEdit.noteID;
   });
 
@@ -43,31 +43,36 @@ function editTodos(todoID) {
     }
     if(((differenceInDays(todoToEdit.dueDate, currentDate)) < 7) && ((differenceInDays(todoToEdit.dueDate, currentDate)) >= 0)){
       console.log(differenceInDays(todoToEdit.dueDate, currentDate))
-      if(todosWeeks.find((todo)=> todo === todoToEdit) === undefined){
+      if(localTodosWeeks.find((todo)=> todo === todoToEdit) === undefined){
 
-        todosWeeks.push(todoToEdit)
+        localTodosWeeks.push(todoToEdit)
+        localStorage.setItem("localTodosWeeks", JSON.stringify(localTodosWeeks));
+
       }
     } else {
-      todosWeeks.splice(indexWeeks,1)
+      localTodosWeeks.splice(indexWeeks,1)
+      localStorage.setItem("localTodosWeeks", JSON.stringify(localTodosWeeks));
 
     }
     if (((differenceInHours(todoToEdit.dueDate, currentDate) >= 0) && (differenceInHours(todoToEdit.dueDate, currentDate) <= 24))||((differenceInHours(todoToEdit.dueDate, currentDate) <= 0) && (differenceInHours(todoToEdit.dueDate, currentDate) >= -24))){
       console.log(differenceInHours(todoToEdit.dueDate, currentDate));
-      if(todosToday.find((todo)=> todo === todoToEdit) === undefined){
+      if(localTodosToday.find((todo)=> todo === todoToEdit) === undefined){
+        localTodosToday.push(todoToEdit)
+        localStorage.setItem("localTodosToday", JSON.stringify(localTodosToday));
 
-        todosToday.push(todoToEdit)
       }
     }else {
-      todosToday.splice(indexToday, 1)
+      localTodosToday.splice(indexToday, 1)
+      localStorage.setItem("localTodosToday", JSON.stringify(localTodosToday));
     }
   
 
     editTodoForm.style.display = "none";
     darkOverlay.classList.remove("dark-overlay2");
     editTodoForm.removeEventListener("submit", saveEdit);
-    if (projects !== "" && clickedObj.thisProjectClicked) {
-      for (let i = 0; i < projects.length; i++) {
-        const project = projects[i];
+    if (localProjects !== "" && clickedObj.thisProjectClicked) {
+      for (let i = 0; i < localProjects.length; i++) {
+        const project = localProjects[i];
         if (project.projectTodos.includes(todoToEdit)) {
           renderProjectTodo(project.projectTodos);
         }

@@ -2,7 +2,7 @@ import background from "./images/project-background.png";
 import { renderDOM, renderProjectTodo } from "./renderDOM";
 import { clickedObj } from "./index.js";
 import { differenceInDays, differenceInHours } from "date-fns";
-import { todosProject, Todos, todos, todosToday, todosWeeks } from "./storetodos.js";
+import { todosProject, Todos, todos, todosToday, todosWeeks,localTodos,localTodosToday,localTodosWeeks } from "./storetodos.js";
 import { editTodos } from "./form-edit-submit.js";
 const content = document.getElementById("content");
 const darkOverlay = document.getElementById("dark-overlay");
@@ -18,11 +18,12 @@ const weekButton = document.getElementById("week-button");
 const projectsButton = document.getElementById("projects-button");
 const notesButton = document.getElementById("notes-button");
 const currentDate = new Date();
-const projects = [];
+const localProjects = JSON.parse(localStorage.getItem("localProjects")) || [];
+
 
 class Project {
   constructor(title) {
-    (this.title = title), (this.projectTodos = []), (this.projectID = projects.length + 1);
+    (this.title = title), (this.projectTodos = []), (this.projectID = localProjects.length + 1);
   }
 }
 
@@ -69,8 +70,8 @@ function addProject() {
   projectResult.appendChild(myDeleteProjectButton);
 
   content.appendChild(projectResultRow);
-  for (let i = 0; i < projects.length; i++) {
-    const element = projects[i];
+  for (let i = 0; i < localProjects.length; i++) {
+    const element = localProjects[i];
     const newProjectResult = projectResult.cloneNode(true);
     const newDivProjectTitle = newProjectResult.querySelector(".project-title");
     const newDivProjectResultText = newProjectResult.querySelector(".project-click");
@@ -103,7 +104,7 @@ function addProject() {
 
       resID = ev.target.projectID;
       console.log(resID)
-      
+
       if (ev.target.projectID === element.projectID) {
         if (element.projectTodos !== undefined) {
           renderProjectTodo(element.projectTodos);
@@ -148,15 +149,25 @@ function saveTodosOnProjectFormSubmit(resID, project) {
         priority
       );
       console.log(resID, project.projectID)
-      todos.push(todo);
-      project.projectTodos.push(todo);
+      localTodos.push(todo)
+      if(localProjects.includes(project)){
+        project.projectTodos.push(todo);
+        console.log("hii")
+      }
+      localStorage.setItem("localTodos", JSON.stringify(localTodos));
+      console.log(project)
+
       if(((differenceInDays(todo.dueDate, currentDate)) < 7) && ((differenceInDays(todo.dueDate, currentDate)) >= 0)){
         console.log(differenceInDays(todo.dueDate, currentDate))
-        todosWeeks.push(todo)
+        localTodosWeeks.push(todo)
+        localStorage.setItem("localTodosWeeks", JSON.stringify(localTodosWeeks));
+
       }
       if (((differenceInHours(todo.dueDate, currentDate) >= 0) && (differenceInHours(todo.dueDate, currentDate) <= 24))||((differenceInHours(todo.dueDate, currentDate) <= 0) && (differenceInHours(todo.dueDate, currentDate) >= -24))){
         console.log(differenceInHours(todo.dueDate, currentDate));
-        todosToday.push(todo);   
+        localTodosToday.push(todo)
+        localStorage.setItem("localTodosToday", JSON.stringify(localTodosToday));
+ 
       }
   
       renderProjectTodo(project.projectTodos);
@@ -174,8 +185,7 @@ function saveTodosOnProjectFormSubmit(resID, project) {
 let saveTodoInProject = null;
 function addProjectName() {
   projectsList.innerHTML = "";
-  console.log(projects)
-  projects.forEach(function (project) {
+  localProjects.forEach(function (project) {
 
     let resID;
     let footer;
@@ -207,8 +217,10 @@ function addProjectName() {
       weekButton.classList.remove("clicked");
       notesButton.classList.remove("clicked");
     
-      content.innerHTML = "";
+      // content.innerHTML = "";
       resID = ev.target.projectID;
+      console.log(project)
+
       if (ev.target.projectID === project.projectID) {
         if (project.projectTodos !== undefined) {
           renderProjectTodo(project.projectTodos);
@@ -231,11 +243,13 @@ function saveProjectsOnSubmit() {
     ev.preventDefault();
     const addProjectTitle = document.getElementById("add-project-title").value;
     const project = new Project(addProjectTitle);
-    projects.push(project);
+    localProjects.push(project)
+    localStorage.setItem("localProjects", JSON.stringify(localProjects));
+
     addProjectForm.style.display = "none";
     darkOverlay.classList.remove("dark-overlay5");
     addProject();
     addProjectName();
   });
 }
-export { saveProjectsOnSubmit, projects, addProject, addProjectName, addTodoInProjectForm };
+export { saveProjectsOnSubmit, localProjects, addProject, addProjectName, addTodoInProjectForm };
