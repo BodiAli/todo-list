@@ -5,7 +5,7 @@ const notes = [];
 const localNotes = JSON.parse(localStorage.getItem("localNotes")) || [];
 
 class Note {
-  constructor(title, details, noteID) {
+  constructor(title, details) {
     (this.title = title), (this.details = details), (this.noteID = notes.length + 1);
   }
 }
@@ -28,8 +28,6 @@ function addNote() {
   noteResult.setAttribute("id", "note-result");
   noteResult.classList.add("column");
   noteResult.classList.add("col-6");
-  noteResult.classList.add("h-50");
-  noteResult.classList.add("w-25");
   noteResult.classList.add("mb-1");
   noteResult.classList.add("border");
   noteResult.classList.add("border-3");
@@ -90,9 +88,11 @@ function addNote() {
     newDivNote.addEventListener("input", function () {
       limitText(this, 25);
       element.title = newDivNote.textContent;
+      localStorage.setItem("localNotes", JSON.stringify(localNotes));
     });
     newDivParagraph.addEventListener("input", function () {
       element.details = newDivParagraph.textContent;
+      localStorage.setItem("localNotes", JSON.stringify(localNotes));
     });
     noteResultRow.appendChild(newNoteResult);
   }

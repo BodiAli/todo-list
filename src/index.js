@@ -38,7 +38,6 @@ const lowPriorityButtonProject = document.getElementById("low-in-project");
 const midPriorityButtonProject = document.getElementById("mid-in-project");
 const highPriorityButtonProject = document.getElementById("high-in-project");
 const addProjectTitle = document.getElementById("add-project-title");
-
 const addNoteTitle = document.getElementById("add-note-title");
 const addNoteDetails = document.getElementById("textarea-note");
 
@@ -229,7 +228,7 @@ notesButton.addEventListener("click", function () {
 
 export { clickedObj };
 document.addEventListener("DOMContentLoaded", addProjectName);
-// document.addEventListener("DOMContentLoaded", renderDOM);
+document.addEventListener("DOMContentLoaded", renderDOM);
 document.addEventListener("DOMContentLoaded", function (ev) {
   clickedObj.homeClicked = true;
   clickedObj.todayClicked = true;
@@ -247,3 +246,49 @@ document.addEventListener("DOMContentLoaded", function (ev) {
     item.classList.remove("clicked2");
   });
 });
+function applyStyles() {
+  const mainContent = document.getElementById("main");
+  const mobileButtons = document.getElementById("mobile-buttons");
+  const mobileTodoDetails = document.getElementById("mobile-todo-details");
+  const mobileTodoEditDetails = document.getElementById("mobile-todo-edit-details");
+  const mobileTodoInProjectDetails = document.getElementById("mobile-todo-in-project-details");
+  const addTodoFooter = document.getElementById("add-todo-footer");
+  const addTodoInProjectFooter = document.getElementById("add-todo-in-project-footer");
+  const mobileTextareaEdit = document.getElementById("textarea-edit");
+  const editTodoFooter = document.getElementById("footer-edit");
+  const dateEdit = document.getElementById("date-edit");
+  if (window.innerWidth <= 768) {
+    mainContent.classList.remove("h-100");
+    mobileTodoDetails.classList.remove("h-50");
+    mobileTodoEditDetails.classList.remove("h-25");
+    mobileTodoEditDetails.classList.remove("mb-5");
+    mobileTodoInProjectDetails.classList.remove("h-50");
+    todoDetail.classList.remove("h-100");
+    todoDetailsInProjectValue.classList.remove("h-100");
+    mobileButtons.classList.remove("w-50");
+    todoDateValue.classList.remove("mb-4");
+    addTodoFooter.classList.remove("h-25");
+    addTodoInProjectFooter.classList.remove("h-25");
+    mobileTextareaEdit.classList.remove("h-100");
+    editTodoFooter.classList.remove("h-25");
+    dateEdit.classList.remove("mt-5");
+  } else {
+    mobileTodoDetails.classList.add("h-50");
+    mobileTodoInProjectDetails.classList.add("h-50");
+    todoDetailsInProjectValue.classList.add("h-100");
+    mobileTodoEditDetails.classList.add("h-25");
+    mobileTodoEditDetails.classList.add("mb-5");
+    mainContent.classList.add("h-100");
+    todoDetail.classList.add("h-100");
+    mobileButtons.classList.add("w-50");
+    todoDateValue.classList.add("mb-4");
+    addTodoFooter.classList.add("h-25");
+    addTodoInProjectFooter.classList.add("h-25");
+    mobileTextareaEdit.classList.add("h-100");
+    editTodoFooter.classList.add("h-25");
+    dateEdit.classList.add("mt-5");
+  }
+}
+
+window.onload = applyStyles;
+window.onresize = applyStyles;

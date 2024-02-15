@@ -89,7 +89,7 @@ header img {
 }
 
 #add {
-  position: absolute;
+  position: fixed;
   padding: 0;
   top: 80%;
   left: 90%;
@@ -101,7 +101,9 @@ header img {
 #add:active {
   color: #402e32;
 }
-#details {
+#details,
+#edit-button,
+#delete-in-todo {
   z-index: 0;
 }
 #add-todo {
@@ -318,6 +320,16 @@ header img {
     left: 0;
   }
 }
+#todo-mobile {
+  border-radius: 50rem;
+}
+.note-paragraph {
+  max-height: 168px;
+}
+#note-result {
+  width: 25%;
+  height: 50%;
+}
 
 @media only screen and (max-width: 768px) {
   header {
@@ -382,6 +394,112 @@ header img {
     left: 75%;
     font-size: 3rem;
   }
-  #main {
+  #check-title {
+    display: flex;
+    align-items: center;
+
+    flex: 1;
+  }
+  #todo-mobile {
+    height: min-content;
+    justify-content: space-between;
+    flex-direction: column;
+    padding: 10px 5px;
+    border-radius: 1px;
+  }
+  #todo-title {
+    height: fit-content;
+    overflow: auto;
+    flex: 1;
+    border: none;
+    padding: 0;
+  }
+  .delete {
+    flex: 1;
+  }
+  .label-mobile {
+    font-size: 0.8rem;
+  }
+  #submit-form,
+  #submit-form-in-project,
+  #edit-form {
+    margin-left: 0px;
+    font-size: 0.8rem;
+    height: 17px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  #date,
+  #date-in-project,
+  #date-edit {
+    font-size: 0.8rem;
+    height: 20px;
+  }
+  #low,
+  #low-in-project,
+  #low-edit,
+  #mid,
+  #mid-in-project,
+  #mid-edit,
+  #high,
+  #high-in-project,
+  #high-edit {
+    font-size: 0.8rem;
+    height: 17px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .mobile-todo-priority {
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .project-title {
+    font-size: 1rem;
+  }
+  #project-result {
+    padding: 5px;
+  }
+  #content {
+    height: 100%;
+  }
+  #delete-project {
+    top: 4%;
+    left: 85%;
+    font-size: 0.5rem;
+  }
+  #add-note {
+    top: 20%;
+    left: 15%;
+    width: 200px;
+  }
+  #note-result {
+    width: 75%;
+    height: 75%;
+  }
+  .custom-line-break {
+    max-width: 100px;
+    width: 100px;
+  }
+  #close-note {
+    left: 83%;
+  }
+  #edit-todo {
+    top: 10%;
+    left: 7%;
+    width: 250px;
+  }
+
+  .card.edit {
+    height: 350px;
+  }
+  #display-details {
+    top: 20%;
+    left: 7%;
+
+    width: 250px;
   }
 }

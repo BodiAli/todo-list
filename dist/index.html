@@ -52,7 +52,7 @@
       </div>
     </header>
     <div class="container-fluid w-100 p-0 mx-0" id="container">
-      <div class="row w-100 h-100 mx-0 h-sm-25" id="main">
+      <div class="row w-100 h-100 mx-0" id="main">
         <div class="column col-md-2 text-white" id="lists-col">
           <nav class="navbar navbar-expand-md navbar-dark">
             <button
@@ -78,15 +78,16 @@
           </nav>
         </div>
         <div class="column col-md-10 p-4 position-relative overflow-auto" id="content">
-          <div id="todo-row" class="row mb-4 initial">
+          <div id="todo-row" class="row mb-4 initial visually-hidden">
             <div
-              class="column col-12 border-5 border-dark border rounded-pill d-flex justify-content-center custom-shadow"
+              id="todo-mobile"
+              class="column col-md-12 border-5 border-dark border d-flex flex-md-row justify-content-md-center custom-shadow"
             >
-              <div class="input-group gap-2">
+              <div class="input-group gap-2" id="check-title">
                 <input type="checkbox" class="form-check-input align-self-center" />
                 <span id="todo-title" class="input-group-text bg-dark bg-opacity-10"></span>
               </div>
-              <div class="input-group w-50 d-flex justify-content-end">
+              <div id="mobile-buttons" class="input-group w-50 d-flex justify-content-md-end">
                 <button id="details" class="btn btn-outline-secondary border-0 text-black details">
                   Details
                 </button>
@@ -94,7 +95,7 @@
                 <button id="edit-button" class="btn btn-outline-secondary border-0 edit">
                   <i class="bi bi-pencil-fill"></i>
                 </button>
-                <button class="btn btn-outline-danger border-0 delete">
+                <button id="delete-in-todo" class="btn btn-outline-danger border-0 delete">
                   <i class="bi bi-trash3-fill"></i>
                 </button>
               </div>
@@ -116,16 +117,16 @@
               />
               <label for="title">Title</label>
             </div>
-            <div class="form-floating h-50 mb-3">
+            <div id="mobile-todo-details" class="form-floating h-50 mb-3">
               <textarea
                 id="textarea"
                 class="form-control h-100 d-block w-100 border-0 bg-transparent"
               ></textarea>
-              <label for="textarea">Details: e.g (rent, cleaning, meeting)</label>
+              <label class="label-mobile" for="textarea">Details: e.g (rent, cleaning, meeting)</label>
             </div>
             <span>Due Date:</span>
             <input id="date" class="mb-4 form-control w-25 d-inline" type="date" required />
-            <div class="btn-group d-flex gap-5 align-items-end">
+            <div class="btn-group d-flex gap-md-5 align-items-md-end mobile-todo-priority">
               <span class="align-text-top"><br />Priority:</span>
               <button id="low" class="btn btn-success text-black fw-bold flex-grow-0 rounded-5">Low</button>
               <button id="mid" class="btn btn-warning text-black fw-bold flex-grow-0 rounded-5">Mid</button>
@@ -140,7 +141,7 @@
       </form>
       <form id="edit-todo" class="position-absolute">
         <div class="card edit w-100">
-          <div class="card-body card-img-overlay text-black edit">
+          <div id="mobile-edit-card-body" class="card-body card-img-overlay text-black edit">
             <div class="form-floating">
               <input
                 type="text"
@@ -150,26 +151,32 @@
               />
               <label for="title">Title</label>
             </div>
-            <div class="form-floating h-25 mb-5">
+            <div id="mobile-todo-edit-details" class="form-floating h-25 mb-5">
               <textarea
                 id="textarea-edit"
                 class="form-control h-100 d-block w-100 border-0 bg-transparent"
               ></textarea>
-              <label for="textarea">Details: e.g (rent, cleaning, meeting)</label>
+              <label class="label-mobile" for="textarea">Details: e.g (rent, cleaning, meeting)</label>
             </div>
             <span>Due Date:</span>
             <input id="date-edit" class="mt-5 form-control w-50 d-inline" type="date" />
-            <div class="btn-group d-flex gap-3 align-items-end">
+            <div class="btn-group d-flex gap-md-3 align-items-md-end mobile-todo-priority">
               <span class="align-text-top"><br />Priority:</span>
-              <button id="low-edit" class="btn btn-success flex-grow-0 rounded-5 btn-sm">Low</button>
-              <button id="mid-edit" class="btn btn-warning flex-grow-0 rounded-5 btn-sm">Mid</button>
-              <button id="high-edit" class="btn btn-danger flex-grow-0 rounded-5 btn-sm">High</button>
+              <button id="low-edit" class="btn btn-success text-black fw-bold flex-grow-0 rounded-5 btn-sm">
+                Low
+              </button>
+              <button id="mid-edit" class="btn btn-warning text-black fw-bold flex-grow-0 rounded-5 btn-sm">
+                Mid
+              </button>
+              <button id="high-edit" class="btn btn-danger text-black fw-bold flex-grow-0 rounded-5 btn-sm">
+                High
+              </button>
               <button id="edit-form" type="submit" class="btn btn-primary flex-grow-0 rounded-2 btn-sm">
                 Confirm Edit
               </button>
             </div>
           </div>
-          <div id="footer" class="card-footer h-25">Edit Todo</div>
+          <div id="footer-edit" class="card-footer h-25">Edit Todo</div>
         </div>
       </form>
       <div id="display-details" class="position-absolute">
@@ -207,7 +214,7 @@
                 id="textarea-note"
                 class="form-control h-100 d-block w-100 border-0 bg-transparent"
               ></textarea>
-              <label for="textarea-note">Details: e.g (rent, cleaning, meeting)</label>
+              <label for="textarea-note">Details</label>
             </div>
             <button id="add-note-button" type="submit" class="btn btn-primary flex-grow-0 rounded-2 btn-sm">
               Add Note
@@ -255,16 +262,16 @@
               />
               <label for="title-in-project">Title</label>
             </div>
-            <div class="form-floating h-50 mb-3">
+            <div id="mobile-todo-in-project-details" class="form-floating h-50 mb-3">
               <textarea
                 id="textarea-in-project"
                 class="form-control h-100 d-block w-100 border-0 bg-transparent"
               ></textarea>
-              <label for="textarea">Details: e.g (rent, cleaning, meeting)</label>
+              <label class="label-mobile" for="textarea">Details: e.g (rent, cleaning, meeting)</label>
             </div>
             <span>Due Date:</span>
             <input id="date-in-project" class="mb-4 form-control w-25 d-inline" type="date" required />
-            <div class="btn-group d-flex gap-5 align-items-end">
+            <div class="btn-group d-flex gap-md-5 align-items-md-end mobile-todo-priority">
               <span class="align-text-top"><br />Priority:</span>
               <button id="low-in-project" class="btn btn-success text-black fw-bold flex-grow-0 rounded-5">
                 Low
