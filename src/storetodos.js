@@ -1,6 +1,5 @@
 import { renderDOM, renderTodayTodos, renderProjectTodo } from "./renderDOM.js";
 import { differenceInDays, differenceInHours } from "date-fns";
-import { clickedObj } from "./index.js";
 const currentDate = new Date();
 const darkOverlay = document.getElementById("dark-overlay");
 const lowPriorityButton = document.getElementById("low");
@@ -50,12 +49,10 @@ function saveTodosOnSubmit() {
     todos.push(todo);
     localTodos.push(todo);
     if(((differenceInDays(todo.dueDate, currentDate)) < 7) && ((differenceInDays(todo.dueDate, currentDate)) >= 0)){
-      console.log(differenceInDays(todo.dueDate, currentDate))
       localTodosWeeks.push(todo)
       todosWeeks.push(todo)
     }
     if (((differenceInHours(todo.dueDate, currentDate) >= 0) && (differenceInHours(todo.dueDate, currentDate) <= 24))||((differenceInHours(todo.dueDate, currentDate) <= 0) && (differenceInHours(todo.dueDate, currentDate) >= -24))){
-      console.log(differenceInHours(todo.dueDate, currentDate));
       localTodosToday.push(todo)
       todosToday.push(todo);   
     }
@@ -64,9 +61,6 @@ function saveTodosOnSubmit() {
     localStorage.setItem("localTodosToday", JSON.stringify(localTodosToday));
 
 
-    // localStorage.todosWeeks = JSON.stringify(todos)
-    // localStorage.todosToday = JSON.stringify(todos)
-    console.log(localTodos)
     renderDOM();
     addTodoForm.style.display = "none";
     darkOverlay.classList.remove("dark-overlay");

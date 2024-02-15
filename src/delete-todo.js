@@ -1,5 +1,5 @@
 import { todos, todosToday, todosWeeks, localTodos, localTodosToday, localTodosWeeks } from "./storetodos.js";
-import { renderDOM, renderTodayTodos, renderWeeksTodos } from "./renderDOM.js";
+import { renderDOM } from "./renderDOM.js";
 import { localProjects } from "./add-projects.js";
 import { clickedObj } from "./index.js";
 import { renderProjectTodo } from "./renderDOM.js";

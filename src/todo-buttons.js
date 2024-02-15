@@ -1,5 +1,5 @@
-import { todos, localTodos } from "./storetodos.js";
-import { editTodos, saveTodosOnEdit } from "./form-edit-submit.js";
+import { localTodos } from "./storetodos.js";
+import { editTodos } from "./form-edit-submit.js";
 import { deleteTodo } from "./delete-todo.js";
 const content = document.getElementById("content");
 const editTodoForm = document.getElementById("edit-todo");

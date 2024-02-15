@@ -11,6 +11,8 @@ export default function addImages() {
   const cardElementAdd = document.querySelector(".card.add");
   const cardElementEdit = document.querySelector(".card.edit");
   const cardElementProject = document.querySelector(".card.add-in-project");
+  const collapseButton = document.querySelector("#collapse");
+  const logoDiv = document.querySelector("#logo");
   const linkTag = document.createElement("link");
   const formBackgroundImageAdd = new Image();
   formBackgroundImageAdd.src = todoBackground;
@@ -29,7 +31,7 @@ export default function addImages() {
   const iconHeader = new Image();
   iconHeader.src = icon;
   iconHeader.alt = "task list";
-  header.appendChild(iconHeader);
+  logoDiv.appendChild(iconHeader);
   head.appendChild(linkTag);
   cardElementAdd.insertBefore(formBackgroundImageAdd, cardBodyAdd);
   cardElementEdit.insertBefore(formBackgroundImageEdit, cardBodyEdit);

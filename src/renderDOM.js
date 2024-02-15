@@ -7,8 +7,6 @@ import {
   localTodosToday,
   localTodosWeeks,
 } from "./storetodos.js";
-import { clickedObj } from "./index.js";
-import { projects } from "./add-projects.js";
 const content = document.getElementById("content");
 const todoRow = document.getElementById("todo-row");
 function renderDOM() {
@@ -17,6 +15,7 @@ function renderDOM() {
     const element = localTodos[i];
 
     const myTodoRow = todoRow.cloneNode(true);
+    myTodoRow.classList.remove("visually-hidden");
     const todoTitle = myTodoRow.querySelector("#todo-title");
     const todoDate = myTodoRow.querySelector("#todo-date");
     const todoDetailsButton = myTodoRow.querySelector(".details");
@@ -126,7 +125,6 @@ function renderWeeksTodos() {
   }
 }
 function renderProjectTodo(array) {
-  // debugger;
   content.innerHTML = "";
   for (let i = 0; i < array.length; i++) {
     const project = array[i];

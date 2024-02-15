@@ -1,7 +1,7 @@
 import { todos,todosWeeks,todosToday,localTodos,localTodosToday,localTodosWeeks } from "./storetodos.js";
 import { renderDOM, renderProjectTodo } from "./renderDOM.js";
 import { clickedObj } from "./index.js";
-import { addProjectName, localProjects } from "./add-projects.js";
+import {  localProjects } from "./add-projects.js";
 import { differenceInDays, differenceInHours } from "date-fns";
 const editTodoForm = document.getElementById("edit-todo");
 const darkOverlay = document.getElementById("dark-overlay");
@@ -42,7 +42,6 @@ function editTodos(todoID) {
       todoToEdit.priority = "high";
     }
     if(((differenceInDays(todoToEdit.dueDate, currentDate)) < 7) && ((differenceInDays(todoToEdit.dueDate, currentDate)) >= 0)){
-      console.log(differenceInDays(todoToEdit.dueDate, currentDate))
       if(localTodosWeeks.find((todo)=> todo === todoToEdit) === undefined){
 
         localTodosWeeks.push(todoToEdit)
@@ -55,7 +54,6 @@ function editTodos(todoID) {
 
     }
     if (((differenceInHours(todoToEdit.dueDate, currentDate) >= 0) && (differenceInHours(todoToEdit.dueDate, currentDate) <= 24))||((differenceInHours(todoToEdit.dueDate, currentDate) <= 0) && (differenceInHours(todoToEdit.dueDate, currentDate) >= -24))){
-      console.log(differenceInHours(todoToEdit.dueDate, currentDate));
       if(localTodosToday.find((todo)=> todo === todoToEdit) === undefined){
         localTodosToday.push(todoToEdit)
         localStorage.setItem("localTodosToday", JSON.stringify(localTodosToday));

@@ -1,9 +1,8 @@
 import background from "./images/project-background.png";
-import { renderDOM, renderProjectTodo } from "./renderDOM";
+import {  renderProjectTodo } from "./renderDOM";
 import { clickedObj } from "./index.js";
 import { differenceInDays, differenceInHours } from "date-fns";
-import { todosProject, Todos, todos, todosToday, todosWeeks,localTodos,localTodosToday,localTodosWeeks } from "./storetodos.js";
-import { editTodos } from "./form-edit-submit.js";
+import {  Todos, todos, todosToday, todosWeeks,localTodos,localTodosToday,localTodosWeeks } from "./storetodos.js";
 const content = document.getElementById("content");
 const darkOverlay = document.getElementById("dark-overlay");
 const addProjectForm = document.getElementById("add-project");
@@ -103,7 +102,6 @@ function addProject() {
       });
 
       resID = ev.target.projectID;
-      console.log(resID)
 
       if (ev.target.projectID === element.projectID) {
         if (element.projectTodos !== undefined) {
@@ -116,7 +114,6 @@ function addProject() {
       }
 
       saveTodoInProject = saveTodosOnProjectFormSubmit(resID, element);
-      console.log(clickedObj)
 
     })
     projectResultRow.appendChild(newProjectResult);
@@ -139,7 +136,6 @@ function saveTodosOnProjectFormSubmit(resID, project) {
       priority = "high";
     }
     if (resID !== project.projectID) {
-      console.log(resID, project.projectID, "faaaaaalse");
       return;
     } else if (resID === project.projectID) {
       const todo = new Todos(
@@ -148,23 +144,18 @@ function saveTodosOnProjectFormSubmit(resID, project) {
         todoDateInProjectValue,
         priority
       );
-      console.log(resID, project.projectID)
       localTodos.push(todo)
-      if(localProjects.includes(project)){
-        project.projectTodos.push(todo);
-        console.log("hii")
-      }
+      project.projectTodos.push(todo)
       localStorage.setItem("localTodos", JSON.stringify(localTodos));
-      console.log(project)
+      localStorage.setItem("localProjects", JSON.stringify(localProjects))
+      
 
       if(((differenceInDays(todo.dueDate, currentDate)) < 7) && ((differenceInDays(todo.dueDate, currentDate)) >= 0)){
-        console.log(differenceInDays(todo.dueDate, currentDate))
         localTodosWeeks.push(todo)
         localStorage.setItem("localTodosWeeks", JSON.stringify(localTodosWeeks));
 
       }
       if (((differenceInHours(todo.dueDate, currentDate) >= 0) && (differenceInHours(todo.dueDate, currentDate) <= 24))||((differenceInHours(todo.dueDate, currentDate) <= 0) && (differenceInHours(todo.dueDate, currentDate) >= -24))){
-        console.log(differenceInHours(todo.dueDate, currentDate));
         localTodosToday.push(todo)
         localStorage.setItem("localTodosToday", JSON.stringify(localTodosToday));
  
@@ -217,9 +208,7 @@ function addProjectName() {
       weekButton.classList.remove("clicked");
       notesButton.classList.remove("clicked");
     
-      // content.innerHTML = "";
       resID = ev.target.projectID;
-      console.log(project)
 
       if (ev.target.projectID === project.projectID) {
         if (project.projectTodos !== undefined) {
@@ -232,7 +221,6 @@ function addProjectName() {
       }
 
       saveTodoInProject = saveTodosOnProjectFormSubmit(resID, project);
-      console.log(clickedObj)
     });
     projectsList.appendChild(newList);
   });
@@ -252,4 +240,5 @@ function saveProjectsOnSubmit() {
     addProjectName();
   });
 }
+
 export { saveProjectsOnSubmit, localProjects, addProject, addProjectName, addTodoInProjectForm };

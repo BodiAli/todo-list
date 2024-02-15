@@ -1,5 +1,6 @@
 import "./reset.css";
 import "./style.css";
+import "bootstrap";
 import addImages from "./add-images.js";
 import getFormData from "./form-ui.js";
 import { todoDeleteButton, todoEditButton, todoDetailsButton, todoCheckedButton } from "./todo-buttons.js";
@@ -8,7 +9,7 @@ import { saveTodosOnSubmit } from "./storetodos.js";
 import { renderDOM, renderTodayTodos, renderWeeksTodos } from "./renderDOM.js";
 import { saveNotesOnSubmit, addNote } from "./add-note.js";
 import { noteDeleteButton } from "./delete-note.js";
-import { addProject, saveProjectsOnSubmit, projects, addProjectName } from "./add-projects.js";
+import { addProject, saveProjectsOnSubmit, addProjectName } from "./add-projects.js";
 import { projectDeleteButton } from "./delete-project.js";
 const addTodoButton = document.getElementById("add");
 const addForm = document.getElementById("add-todo");
@@ -227,5 +228,22 @@ notesButton.addEventListener("click", function () {
 });
 
 export { clickedObj };
-// localStorage.clear();
 document.addEventListener("DOMContentLoaded", addProjectName);
+// document.addEventListener("DOMContentLoaded", renderDOM);
+document.addEventListener("DOMContentLoaded", function (ev) {
+  clickedObj.homeClicked = true;
+  clickedObj.todayClicked = true;
+  clickedObj.weekClicked = true;
+  clickedObj.projectsClicked = false;
+  clickedObj.thisProjectClicked = false;
+  clickedObj.notesClicked = false;
+  homeButton.classList.add("clicked");
+  todayButton.classList.remove("clicked");
+  weekButton.classList.remove("clicked");
+  projectsButton.classList.remove("clicked");
+  notesButton.classList.remove("clicked");
+  const allListItems = document.querySelectorAll(".project-lists");
+  allListItems.forEach(function (item) {
+    item.classList.remove("clicked2");
+  });
+});
