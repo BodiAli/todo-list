@@ -340,20 +340,17 @@ header img {
     align-items: center;
     padding: 10px;
     gap: 10px;
-    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
-    border: 5px ridge black;
     user-select: none;
   }
 
   header h1 {
     color: #e36300;
     font-family: "MyFont";
-    font-size: 1.5rem;
-    height: 20px;
+    font-size: 2.3rem;
   }
   header img {
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
     border-radius: 30%;
   }
   #navbar-button {
@@ -370,11 +367,11 @@ header img {
   }
 
   #made-by {
-    font-size: 0.5rem;
-    margin-right: 4px;
+    font-size: 0.7rem;
+    margin-right: 6px;
   }
   #github {
-    font-size: 0.5rem;
+    font-size: 1.2rem;
   }
   #github-text {
     display: none;
@@ -387,10 +384,11 @@ header img {
     width: 20px;
   }
   #main-lists {
-    font-size: 1rem;
+    font-size: 1.2rem;
   }
+
   #add {
-    top: 80%;
+    top: 85%;
     left: 75%;
     font-size: 3rem;
   }
@@ -425,7 +423,7 @@ header img {
   #edit-form {
     margin-left: 0px;
     font-size: 0.8rem;
-    height: 17px;
+    height: 30px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -434,7 +432,6 @@ header img {
   #date-in-project,
   #date-edit {
     font-size: 0.8rem;
-    height: 20px;
   }
   #low,
   #low-in-project,
@@ -446,7 +443,7 @@ header img {
   #high-in-project,
   #high-edit {
     font-size: 0.8rem;
-    height: 17px;
+    height: 30px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -454,7 +451,7 @@ header img {
 
   .mobile-todo-priority {
     flex-direction: column;
-    gap: 4px;
+    gap: 10px;
   }
 
   .project-title {
@@ -489,17 +486,21 @@ header img {
   }
   #edit-todo {
     top: 10%;
-    left: 7%;
+    left: 15%;
     width: 250px;
   }
 
   .card.edit {
-    height: 350px;
+    height: 450px;
   }
   #display-details {
     top: 20%;
     left: 7%;
-
+    width: 250px;
+  }
+  #add-project {
+    top: 30%;
+    left: 15%;
     width: 250px;
   }
 }

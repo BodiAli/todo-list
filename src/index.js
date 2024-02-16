@@ -257,6 +257,7 @@ function applyStyles() {
   const mobileTextareaEdit = document.getElementById("textarea-edit");
   const editTodoFooter = document.getElementById("footer-edit");
   const dateEdit = document.getElementById("date-edit");
+  const addProjectButton = document.getElementById("add-project-button");
   if (window.innerWidth <= 768) {
     mainContent.classList.remove("h-100");
     mobileTodoDetails.classList.remove("h-50");
@@ -272,6 +273,7 @@ function applyStyles() {
     mobileTextareaEdit.classList.remove("h-100");
     editTodoFooter.classList.remove("h-25");
     dateEdit.classList.remove("mt-5");
+    addProjectButton.classList.remove("w-25");
   } else {
     mobileTodoDetails.classList.add("h-50");
     mobileTodoInProjectDetails.classList.add("h-50");
@@ -287,6 +289,7 @@ function applyStyles() {
     mobileTextareaEdit.classList.add("h-100");
     editTodoFooter.classList.add("h-25");
     dateEdit.classList.add("mt-5");
+    addProjectButton.classList.add("w-25");
   }
 }
 
