@@ -1,4 +1,4 @@
-import { renderDOM, renderTodayTodos, renderProjectTodo } from "./renderDOM.js";
+import { renderDOM } from "./renderDOM.js";
 import { differenceInDays, differenceInHours } from "date-fns";
 const currentDate = new Date();
 const darkOverlay = document.getElementById("dark-overlay");
@@ -13,11 +13,10 @@ const todosProject = [];
 const localTodos = JSON.parse(localStorage.getItem("localTodos")) || [];
 const localTodosToday = JSON.parse(localStorage.getItem("localTodosToday")) || [];
 const localTodosWeeks = JSON.parse(localStorage.getItem("localTodosWeeks")) || [];
-const localTodosProject = JSON.parse(localStorage.getItem("localTodosProject")) || [];
 
 
 class Todos {
-  constructor(title, description, dueDate, priority, id) {
+  constructor(title, description, dueDate, priority) {
     this.title = title;
     this.description = description;
     this.dueDate = dueDate;
@@ -66,4 +65,4 @@ function saveTodosOnSubmit() {
     darkOverlay.classList.remove("dark-overlay");
   }
 }
-export { saveTodosOnSubmit, todos, todosToday, todosWeeks, todosProject, Todos,localTodos, localTodosToday,localTodosWeeks };
+export { saveTodosOnSubmit, todos, todosToday, todosWeeks, todosProject, Todos, localTodos, localTodosToday,localTodosWeeks };
